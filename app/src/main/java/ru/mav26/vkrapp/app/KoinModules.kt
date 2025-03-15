@@ -1,3 +1,7 @@
 package ru.mav26.vkrapp.app
 
-val appModules = listOf("/* TODO */")
+import ru.mav26.vkrapp.domain.domainModule
+
+val appModules = listOf(
+    domainModule
+)
