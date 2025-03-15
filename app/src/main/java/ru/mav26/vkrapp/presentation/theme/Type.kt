@@ -1,4 +1,4 @@
-package ru.mav26.vkrapp.ui.theme
+package ru.mav26.vkrapp.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

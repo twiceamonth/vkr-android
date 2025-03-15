@@ -1,4 +1,4 @@
-package ru.mav26.vkrapp.ui.theme
+package ru.mav26.vkrapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
