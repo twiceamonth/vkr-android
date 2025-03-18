@@ -6,7 +6,7 @@ import ru.mav26.vkrapp.domain.repository.EffectsRepository
 class EffectsUseCase(
     private val effectsRepository: EffectsRepository
 ) {
-    fun getActiveEffect() : ActiveEffect? {
+    suspend fun getActiveEffect() : ActiveEffect? {
         return effectsRepository.getActiveEffect()
     }
 }

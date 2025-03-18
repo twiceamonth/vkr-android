@@ -7,19 +7,19 @@ import ru.mav26.vkrapp.domain.repository.StoreRepository
 class StoreUseCase(
     private val storeRepository: StoreRepository
 ) {
-    fun getItems(type: String, userLogin: String) : List<StoreItem> {
+    suspend fun getItems(type: String, userLogin: String) : List<StoreItem> {
         return storeRepository.getItemsList(type, userLogin)
     }
 
-    fun getInventory() : List<Inventory> {
+    suspend fun getInventory() : List<Inventory> {
         return storeRepository.getInventory()
     }
 
-    fun heal(characterId: String) {
+    suspend fun heal(characterId: String) {
         return storeRepository.heal(characterId)
     }
 
-    fun buyItem(storeId: String, userLogin: String) {
+    suspend fun buyItem(storeId: String, userLogin: String) {
         return storeRepository.buyItem(storeId, userLogin)
     }
 }

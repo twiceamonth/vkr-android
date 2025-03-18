@@ -15,67 +15,67 @@ import ru.mav26.vkrapp.domain.repository.TaskRepository
 class TaskUseCase(
     private val taskRepository: TaskRepository
 ) {
-    fun getTasks() : List<Task> {
+    suspend fun getTasks() : List<Task> {
         return taskRepository.getTasksList()
     }
 
-    fun getHabits() : List<Habit> {
+    suspend fun getHabits() : List<Habit> {
         return taskRepository.getHabitsList()
     }
 
-    fun getTaskDetails(id: String) : TaskDetails {
+    suspend fun getTaskDetails(id: String) : TaskDetails {
         return taskRepository.getTaskDetails(id)
     }
 
-    fun getHabitDetails(id: String) : HabitDetails {
+    suspend fun getHabitDetails(id: String) : HabitDetails {
         return taskRepository.getHabitDetails(id)
     }
 
-    fun createTask(task: TaskCreate) {
+    suspend fun createTask(task: TaskCreate) {
         return taskRepository.createTask(task)
     }
 
-    fun createHabit(habit: HabitCreate) {
+    suspend fun createHabit(habit: HabitCreate) {
         return taskRepository.createHabit(habit)
     }
 
-    fun createSubtask(subtask: String, taskId: String) {
+    suspend fun createSubtask(subtask: String, taskId: String) {
         return taskRepository.createSubtask(subtask, taskId)
     }
 
-    fun createDetails(details: DetailsCreate, taskId: String) {
+    suspend fun createDetails(details: DetailsCreate, taskId: String) {
         return taskRepository.createDetails(details, taskId)
     }
 
-    fun editTask(newTask: TaskEdit, taskId: String) {
+    suspend fun editTask(newTask: TaskEdit, taskId: String) {
         return taskRepository.editTask(newTask, taskId)
     }
 
-    fun editSubtask(newSubtask: String, subtaskId: String) {
+    suspend fun editSubtask(newSubtask: String, subtaskId: String) {
         return taskRepository.editSubtask(newSubtask, subtaskId)
     }
 
-    fun editHabit(newHabit: HabitEdit, habitId: String) {
+    suspend fun editHabit(newHabit: HabitEdit, habitId: String) {
         return taskRepository.editHabit(newHabit, habitId)
     }
 
-    fun editDetails(newDetails: DetailsEdit, detailsId: String) {
+    suspend fun editDetails(newDetails: DetailsEdit, detailsId: String) {
         return taskRepository.editDetails(newDetails, detailsId)
     }
 
-    fun deleteTask(taskId: String) {
+    suspend fun deleteTask(taskId: String) {
         return taskRepository.deleteTask(taskId)
     }
 
-    fun deleteHabit(habitId: String) {
+    suspend fun deleteHabit(habitId: String) {
         return taskRepository.deleteHabit(habitId)
     }
 
-    fun deleteSubtask(subtaskId: String) {
+    suspend fun deleteSubtask(subtaskId: String) {
         return taskRepository.deleteSubtask(subtaskId)
     }
 
-    fun deleteDetails(detailsId: String) {
+    suspend fun deleteDetails(detailsId: String) {
         return taskRepository.deleteDetails(detailsId)
     }
 }
