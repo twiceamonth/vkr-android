@@ -1,7 +1,8 @@
-package ru.mav26.vkrapp.domain.model.character
+package ru.mav26.vkrapp.data.remote.models.character
 
-import java.time.OffsetDateTime
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class CharacterStats(
     val level: Int? = null,
     val maxHp: Int? = null,
@@ -11,6 +12,6 @@ data class CharacterStats(
     val stressCoef: Int? = null,
     val isDead: Boolean? = null,
     val baseDamage: Int? = null,
-    val deadAt: OffsetDateTime? = null,
+    val deadAt: String? = null,
     val moodLevel: Int? = null
 )
