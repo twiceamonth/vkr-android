@@ -12,35 +12,35 @@ import ru.mav26.vkrapp.domain.model.task.TaskDetails
 import ru.mav26.vkrapp.domain.model.task.TaskEdit
 
 interface TaskRepository {
-    fun getTasksList() : List<Task>
+    suspend fun getTasksList() : List<Task>
 
-    fun getHabitsList() : List<Habit>
+    suspend  fun getHabitsList() : List<Habit>
 
-    fun getHabitDetails(id: String) : HabitDetails
+    suspend fun getHabitDetails(id: String) : HabitDetails
 
-    fun getTaskDetails(id: String) : TaskDetails
+    suspend fun getTaskDetails(id: String) : TaskDetails
 
-    fun createTask(task: TaskCreate)
+    suspend fun createTask(task: TaskCreate)
 
-    fun createHabit(habit: HabitCreate)
+    suspend fun createHabit(habit: HabitCreate)
 
-    fun createSubtask(subtask: String, taskId: String)
+    suspend fun createSubtask(subtask: String, taskId: String)
 
-    fun createDetails(details: DetailsCreate, taskId: String)
+    suspend fun createDetails(details: DetailsCreate, taskId: String)
 
-    fun editTask(newTask: TaskEdit, taskId: String)
+    suspend fun editTask(newTask: TaskEdit, taskId: String)
 
-    fun editSubtask(newSubtask: String, subtaskId: String)
+    suspend fun editSubtask(newSubtask: String, subtaskId: String)
 
-    fun editHabit(newHabit: HabitEdit, habitId: String)
+    suspend fun editHabit(newHabit: HabitEdit, habitId: String)
 
-    fun editDetails(newDetails: DetailsEdit, detailsId: String)
+    suspend fun editDetails(newDetails: DetailsEdit, detailsId: String)
 
-    fun deleteTask(taskId: String)
+    suspend fun deleteTask(taskId: String)
 
-    fun deleteHabit(habitId: String)
+    suspend fun deleteHabit(habitId: String)
 
-    fun deleteSubtask(subtaskId: String)
+    suspend fun deleteSubtask(subtaskId: String)
 
-    fun deleteDetails(detailsId: String)
+    suspend fun deleteDetails(detailsId: String)
 }

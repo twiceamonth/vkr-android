@@ -4,11 +4,11 @@ import ru.mav26.vkrapp.domain.model.store.Inventory
 import ru.mav26.vkrapp.domain.model.store.StoreItem
 
 interface StoreRepository {
-    fun getItemsList(type: String, userLogin: String) : List<StoreItem>
+    suspend fun getItemsList(type: String, userLogin: String) : List<StoreItem>
 
-    fun getInventory() : List<Inventory>
+    suspend fun getInventory() : List<Inventory>
 
-    fun heal(characterId: String)
+    suspend fun heal(characterId: String)
 
-    fun buyItem(storeId: String, userLogin: String)
+    suspend fun buyItem(storeId: String, userLogin: String)
 }
