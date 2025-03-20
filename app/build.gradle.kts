@@ -41,7 +41,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -56,6 +55,8 @@ dependencies {
     implementation(libs.coil.network)
     implementation(libs.ktor.core)
     implementation(libs.ktor.cio)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.kotlin.serialization)
     implementation(libs.kotlinx.serialization)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

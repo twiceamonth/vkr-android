@@ -21,6 +21,7 @@ import ru.mav26.vkrapp.domain.model.task.HabitDetails
 import ru.mav26.vkrapp.domain.model.task.HabitEdit
 import ru.mav26.vkrapp.domain.model.task.Priority
 import ru.mav26.vkrapp.domain.model.task.Subtask
+import ru.mav26.vkrapp.domain.model.task.SubtaskEdit
 import ru.mav26.vkrapp.domain.model.task.Task
 import ru.mav26.vkrapp.domain.model.task.TaskCreate
 import ru.mav26.vkrapp.domain.model.task.TaskDetails
@@ -167,6 +168,13 @@ fun HabitEdit.toApi(): ru.mav26.vkrapp.data.remote.models.tasks.HabitEdit {
         description = this.description,
         streakCount = this.streakCount,
         lastPerformedAt = this.lastPerformedAt.toString()
+    )
+}
+
+fun SubtaskEdit.toApi(): ru.mav26.vkrapp.data.remote.models.tasks.SubtaskEdit {
+    return ru.mav26.vkrapp.data.remote.models.tasks.SubtaskEdit(
+        title = this.title,
+        status = this.status
     )
 }
 

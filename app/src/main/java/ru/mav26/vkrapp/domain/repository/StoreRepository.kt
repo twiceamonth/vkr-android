@@ -6,7 +6,7 @@ import ru.mav26.vkrapp.domain.model.store.StoreItem
 interface StoreRepository {
     suspend fun getItemsList(type: String, userLogin: String) : List<StoreItem>
 
-    suspend fun getInventory() : List<Inventory>
+    suspend fun getInventory(userLogin: String) : List<Inventory>
 
     suspend fun heal(characterId: String)
 

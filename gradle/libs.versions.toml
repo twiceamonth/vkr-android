@@ -37,6 +37,8 @@ coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref 
 coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coilVersion" }
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
 ktor-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktorVersion" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorVersion" }
+ktor-kotlin-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "json" }
 
 [plugins]
