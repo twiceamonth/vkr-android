@@ -26,6 +26,7 @@ fun CharacterResponse.fromApi() : Character {
         currentHp = this.currentHp,
         exp = this.exp,
         coins = this.coins,
+        mood = this.moodLevel,
         stressCoef = this.stressCoef,
         createdAt = OffsetTime.parse(this.createdAt),
         deadAt = OffsetTime.parse(this.deadAt)

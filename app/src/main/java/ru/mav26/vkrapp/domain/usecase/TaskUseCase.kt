@@ -6,6 +6,7 @@ import ru.mav26.vkrapp.domain.model.task.Habit
 import ru.mav26.vkrapp.domain.model.task.HabitCreate
 import ru.mav26.vkrapp.domain.model.task.HabitDetails
 import ru.mav26.vkrapp.domain.model.task.HabitEdit
+import ru.mav26.vkrapp.domain.model.task.SubtaskEdit
 import ru.mav26.vkrapp.domain.model.task.Task
 import ru.mav26.vkrapp.domain.model.task.TaskCreate
 import ru.mav26.vkrapp.domain.model.task.TaskDetails
@@ -15,12 +16,12 @@ import ru.mav26.vkrapp.domain.repository.TaskRepository
 class TaskUseCase(
     private val taskRepository: TaskRepository
 ) {
-    suspend fun getTasks() : List<Task> {
-        return taskRepository.getTasksList()
+    suspend fun getTasks(userLogin: String) : List<Task> {
+        return taskRepository.getTasksList(userLogin)
     }
 
-    suspend fun getHabits() : List<Habit> {
-        return taskRepository.getHabitsList()
+    suspend fun getHabits(userLogin: String) : List<Habit> {
+        return taskRepository.getHabitsList(userLogin)
     }
 
     suspend fun getTaskDetails(id: String) : TaskDetails {
@@ -31,12 +32,12 @@ class TaskUseCase(
         return taskRepository.getHabitDetails(id)
     }
 
-    suspend fun createTask(task: TaskCreate) {
-        return taskRepository.createTask(task)
+    suspend fun createTask(task: TaskCreate, userLogin: String) {
+        return taskRepository.createTask(task, userLogin)
     }
 
-    suspend fun createHabit(habit: HabitCreate) {
-        return taskRepository.createHabit(habit)
+    suspend fun createHabit(habit: HabitCreate, userLogin: String) {
+        return taskRepository.createHabit(habit, userLogin)
     }
 
     suspend fun createSubtask(subtask: String, taskId: String) {
@@ -51,7 +52,7 @@ class TaskUseCase(
         return taskRepository.editTask(newTask, taskId)
     }
 
-    suspend fun editSubtask(newSubtask: String, subtaskId: String) {
+    suspend fun editSubtask(newSubtask: SubtaskEdit, subtaskId: String) {
         return taskRepository.editSubtask(newSubtask, subtaskId)
     }
 

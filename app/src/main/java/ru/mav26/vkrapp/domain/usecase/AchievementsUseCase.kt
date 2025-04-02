@@ -1,6 +1,7 @@
 package ru.mav26.vkrapp.domain.usecase
 
 import ru.mav26.vkrapp.domain.model.achievements.Achievement
+import ru.mav26.vkrapp.domain.model.achievements.AchievementProgress
 import ru.mav26.vkrapp.domain.repository.AchievementsRepository
 
 class AchievementsUseCase(
@@ -8,6 +9,10 @@ class AchievementsUseCase(
 ) {
     suspend fun getAchievements() : List<Achievement> {
         return achievementsRepository.getAchievementsList()
+    }
+
+    suspend fun getAchievementsProgress(userLogin: String) : List<AchievementProgress> {
+        return achievementsRepository.getAchievementsProgress(userLogin)
     }
 
     suspend fun startProgress(userLogin: String, achievementId: String) {

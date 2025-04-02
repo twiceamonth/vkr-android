@@ -11,8 +11,8 @@ class StoreUseCase(
         return storeRepository.getItemsList(type, userLogin)
     }
 
-    suspend fun getInventory() : List<Inventory> {
-        return storeRepository.getInventory()
+    suspend fun getInventory(userLogin: String) : List<Inventory> {
+        return storeRepository.getInventory(userLogin)
     }
 
     suspend fun heal(characterId: String) {

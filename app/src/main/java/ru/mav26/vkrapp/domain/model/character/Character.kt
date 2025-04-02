@@ -17,6 +17,7 @@ data class Character(
     val currentHp: Int,
     val exp: Int,
     val coins: Int,
+    val mood: Int,
     val stressCoef: Int,
     val createdAt: OffsetTime,
     val deadAt: OffsetTime? = null

@@ -4,6 +4,7 @@ import ru.mav26.vkrapp.domain.model.character.Character
 import ru.mav26.vkrapp.domain.model.character.CharacterCreate
 import ru.mav26.vkrapp.domain.model.character.CharacterItems
 import ru.mav26.vkrapp.domain.model.character.CharacterStats
+import ru.mav26.vkrapp.domain.model.character.CharacterType
 import ru.mav26.vkrapp.domain.repository.CharacterRepository
 
 class CharacterUseCase(
@@ -15,6 +16,10 @@ class CharacterUseCase(
 
     suspend fun getAllCharacters(userLogin: String) : List<Character> {
         return characterRepository.getAllCharacters(userLogin)
+    }
+
+    suspend fun getCharacterTypes(): List<CharacterType> {
+        return characterRepository.getCharacterTypes()
     }
 
     suspend fun getRandomDialog(mood: Int) : String {
