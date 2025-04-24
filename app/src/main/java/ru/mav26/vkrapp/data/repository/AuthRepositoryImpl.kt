@@ -6,7 +6,7 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import ru.mav26.vkrapp.data.local.DataStoreManager
+import ru.mav26.vkrapp.data.local.TokenDataStoreManager
 import ru.mav26.vkrapp.data.local.TokenData
 import ru.mav26.vkrapp.data.remote.models.auth.RefreshTokenRequest
 import ru.mav26.vkrapp.data.remote.models.auth.TokensResponse
@@ -15,7 +15,7 @@ import ru.mav26.vkrapp.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
     private val client: HttpClient,
-    private val dataStore: DataStoreManager
+    private val dataStore: TokenDataStoreManager
 ) : AuthRepository {
     override suspend fun login(authRequest: AuthRequest) {
         val response: TokensResponse = client.post("/login") {
@@ -23,10 +23,7 @@ class AuthRepositoryImpl(
             setBody(authRequest)
         }.body()
 
-        dataStore.saveTokens(TokenData(
-            accessToken = response.accessToken,
-            refreshToken = response.refreshToken
-        ))
+        dataStore.saveTokens(response.accessToken, response.refreshToken)
     }
 
     override suspend fun register(authRequest: AuthRequest) {
@@ -35,10 +32,7 @@ class AuthRepositoryImpl(
             setBody(authRequest)
         }.body()
 
-        dataStore.saveTokens(TokenData(
-            accessToken = response.accessToken,
-            refreshToken = response.refreshToken
-        ))
+        dataStore.saveTokens(response.accessToken, response.refreshToken)
     }
 
     override suspend fun refresh(refreshToken: String) {
@@ -47,10 +41,7 @@ class AuthRepositoryImpl(
             setBody(RefreshTokenRequest(refreshToken))
         }.body()
 
-        dataStore.saveTokens(TokenData(
-            accessToken = response.accessToken,
-            refreshToken = response.refreshToken
-        ))
+        dataStore.saveTokens(response.accessToken, response.refreshToken)
     }
 
 }
