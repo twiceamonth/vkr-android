@@ -14,6 +14,7 @@ koinVersion = "4.0.2"
 coilVersion = "3.1.0"
 ktorVersion = "3.1.0"
 json = "1.8.0"
+dataStore = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +41,8 @@ ktor-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktorVer
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorVersion" }
 ktor-kotlin-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "json" }
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
+datastore-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "dataStore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

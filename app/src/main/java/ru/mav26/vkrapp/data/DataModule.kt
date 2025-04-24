@@ -5,7 +5,9 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
+import ru.mav26.vkrapp.data.local.DataStoreManager
 import ru.mav26.vkrapp.data.repository.AchievementsRepositoryImpl
 import ru.mav26.vkrapp.data.repository.AuthRepositoryImpl
 import ru.mav26.vkrapp.data.repository.BossesRepositoryImpl
@@ -35,12 +37,14 @@ val dataModule = module {
         }
     }
 
-    single<AchievementsRepository> { AchievementsRepositoryImpl(get()) }
-    single<AuthRepository> { AuthRepositoryImpl(get()) }
-    single<BossesRepository> { BossesRepositoryImpl(get()) }
-    single<CharacterRepository> { CharacterRepositoryImpl(get()) }
-    single<EffectsRepository> { EffectsRepositoryImpl(get()) }
-    single<EventsRepository> { EventsRepositoryImpl(get()) }
-    single<StoreRepository> { StoreRepositoryImpl(get()) }
-    single<TaskRepository> { TaskRepositoryImpl(get()) }
+    single { DataStoreManager(get()) }
+
+    single<AchievementsRepository> { AchievementsRepositoryImpl(get(), get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(), get()) }
+    single<BossesRepository> { BossesRepositoryImpl(get(), get()) }
+    single<CharacterRepository> { CharacterRepositoryImpl(get(), get()) }
+    single<EffectsRepository> { EffectsRepositoryImpl(get(), get()) }
+    single<EventsRepository> { EventsRepositoryImpl(get(), get()) }
+    single<StoreRepository> { StoreRepositoryImpl(get(), get()) }
+    single<TaskRepository> { TaskRepositoryImpl(get(), get()) }
 }

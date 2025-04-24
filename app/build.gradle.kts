@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.kotlin.serialization)
     implementation(libs.kotlinx.serialization)
+    implementation(libs.datastore)
+    implementation(libs.datastore.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
