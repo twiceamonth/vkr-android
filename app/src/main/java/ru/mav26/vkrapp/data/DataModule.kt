@@ -5,8 +5,11 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import ru.mav26.vkrapp.data.local.TokenDataStoreManager
+import ru.mav26.vkrapp.data.remote.AccessTokenInterceptor
+import ru.mav26.vkrapp.data.remote.TokenRefreshInterceptor
 import ru.mav26.vkrapp.data.repository.AchievementsRepositoryImpl
 import ru.mav26.vkrapp.data.repository.AuthRepositoryImpl
 import ru.mav26.vkrapp.data.repository.BossesRepositoryImpl
@@ -25,7 +28,8 @@ import ru.mav26.vkrapp.domain.repository.StoreRepository
 import ru.mav26.vkrapp.domain.repository.TaskRepository
 
 val dataModule = module {
-    single { TokenDataStoreManager(get()) }
+    single { TokenDataStoreManager(androidContext()) }
+    single { AccessTokenInterceptor(get()) }
     single { TokenRefreshInterceptor(get(), get()) }
 
     single {
@@ -37,6 +41,7 @@ val dataModule = module {
                 url("http://localhost:8000")
             }
             install(get<TokenRefreshInterceptor>())
+            install(get<AccessTokenInterceptor>())
         }
     }
 

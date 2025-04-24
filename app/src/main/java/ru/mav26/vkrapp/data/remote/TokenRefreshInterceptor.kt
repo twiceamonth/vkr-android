@@ -1,4 +1,4 @@
-package ru.mav26.vkrapp.data
+package ru.mav26.vkrapp.data.remote
 
 import io.ktor.client.*
 import io.ktor.client.plugins.*
