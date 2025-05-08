@@ -45,12 +45,12 @@ val dataModule = module {
         }
     }
 
-    single<AchievementsRepository> { AchievementsRepositoryImpl(get(), get()) }
+    single<AchievementsRepository> { AchievementsRepositoryImpl(get()) }
     single<AuthRepository> { AuthRepositoryImpl(get(), get()) }
-    single<BossesRepository> { BossesRepositoryImpl(get(), get()) }
-    single<CharacterRepository> { CharacterRepositoryImpl(get(), get()) }
-    single<EffectsRepository> { EffectsRepositoryImpl(get(), get()) }
-    single<EventsRepository> { EventsRepositoryImpl(get(), get()) }
-    single<StoreRepository> { StoreRepositoryImpl(get(), get()) }
-    single<TaskRepository> { TaskRepositoryImpl(get(), get()) }
+    single<BossesRepository> { BossesRepositoryImpl(get()) }
+    single<CharacterRepository> { CharacterRepositoryImpl(get()) }
+    single<EffectsRepository> { EffectsRepositoryImpl(get()) }
+    single<EventsRepository> { EventsRepositoryImpl(get()) }
+    single<StoreRepository> { StoreRepositoryImpl(get()) }
+    single<TaskRepository> { TaskRepositoryImpl(get()) }
 }
