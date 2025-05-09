@@ -17,9 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.presentation.feature.auth.components.AuthButton
 import ru.mav26.vkrapp.presentation.feature.auth.components.AuthTextField
 
@@ -41,7 +43,7 @@ fun LoginPage(modifier: Modifier = Modifier) {
 
         AuthTextField(
             value = login,
-            label = "Логин",
+            label = stringResource(R.string.loginLabel),
             onValueChange = { login = it },
             modifier = Modifier
                 .fillMaxWidth()
@@ -50,7 +52,7 @@ fun LoginPage(modifier: Modifier = Modifier) {
 
         AuthTextField(
             value = password,
-            label = "Пароль",
+            label = stringResource(R.string.passwordLabel),
             onValueChange = { password = it },
             modifier = Modifier
                 .fillMaxWidth()
@@ -58,13 +60,13 @@ fun LoginPage(modifier: Modifier = Modifier) {
         )
 
         AuthButton(
-            text = "Войти",
+            text = stringResource(R.string.login),
             modifier = Modifier.width(164.dp).padding(bottom = 2.dp)
         ) { /*TODO*/ }
 
         TextButton(onClick = { /*TODO*/ }) {
             Text(
-                "Назад",
+                text = stringResource(R.string.back),
                 fontSize = 16.sp,
                 lineHeight = 19.sp,
                 color = Color(0xFFD0ECF6)
