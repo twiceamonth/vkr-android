@@ -23,8 +23,7 @@ class CreateCharacterViewModel(
         }
     }
 
-    fun createCharacter(userLogin: String) {
-        /*todo: userlogin env*/
+    fun createCharacter() {
         val character = CharacterCreate(
             characterName = _state.value.characterName,
             gender = _state.value.characterGender,
@@ -37,7 +36,7 @@ class CreateCharacterViewModel(
         )
 
         viewModelScope.launch(Dispatchers.IO) {
-            characterUseCase.createCharacter(character, userLogin)
+            characterUseCase.createCharacter(character)
         }
     }
 

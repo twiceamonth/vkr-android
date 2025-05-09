@@ -10,12 +10,12 @@ import ru.mav26.vkrapp.domain.repository.CharacterRepository
 class CharacterUseCase(
     private val characterRepository: CharacterRepository
 ) {
-    suspend fun getCharacter(userLogin: String) : Character {
-        return characterRepository.getCharacter(userLogin)
+    suspend fun getCharacter() : Character {
+        return characterRepository.getCharacter()
     }
 
-    suspend fun getAllCharacters(userLogin: String) : List<Character> {
-        return characterRepository.getAllCharacters(userLogin)
+    suspend fun getAllCharacters() : List<Character> {
+        return characterRepository.getAllCharacters()
     }
 
     suspend fun getCharacterTypes(): List<CharacterType> {
@@ -26,8 +26,8 @@ class CharacterUseCase(
         return characterRepository.getRandomDialog(mood)
     }
 
-    suspend fun createCharacter(newCharacter: CharacterCreate, userLogin: String) {
-        return characterRepository.createCharacter(newCharacter, userLogin)
+    suspend fun createCharacter(newCharacter: CharacterCreate) {
+        return characterRepository.createCharacter(newCharacter)
     }
 
     suspend fun editItems(newItems: CharacterItems, characterId: String) {

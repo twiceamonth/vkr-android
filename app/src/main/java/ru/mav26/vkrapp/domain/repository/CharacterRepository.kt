@@ -7,15 +7,15 @@ import ru.mav26.vkrapp.domain.model.character.CharacterStats
 import ru.mav26.vkrapp.domain.model.character.CharacterType
 
 interface CharacterRepository {
-    suspend fun getCharacter(userLogin: String) : Character
+    suspend fun getCharacter() : Character
 
-    suspend fun getAllCharacters(userLogin: String) : List<Character>
+    suspend fun getAllCharacters() : List<Character>
 
     suspend fun getCharacterTypes() : List<CharacterType>
 
     suspend fun getRandomDialog(mood: Int) : String
 
-    suspend fun createCharacter(newCharacter: CharacterCreate, userLogin: String)
+    suspend fun createCharacter(newCharacter: CharacterCreate)
 
     suspend fun editCharacterItems(newItems: CharacterItems, characterId: String)
 
