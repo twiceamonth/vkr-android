@@ -10,15 +10,15 @@ import ru.mav26.vkrapp.domain.usecase.AuthUseCase
 class AuthViewModel(
     private val authUseCase: AuthUseCase
 ) : ViewModel() {
-    fun login(authRequest: AuthRequest) {
+    fun login(login: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            authUseCase.login(authRequest)
+            authUseCase.login(AuthRequest(login, password))
         }
     }
 
-    fun register(authRequest: AuthRequest) {
+    fun register(login: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            authUseCase.register(authRequest)
+            authUseCase.register(AuthRequest(login, password))
         }
     }
 

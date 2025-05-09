@@ -6,6 +6,11 @@
     <string name="back">Назад</string>
     <string name="next">Далее</string>
 
+    <string name="choose">Выбрать</string>
+    <string name="cansel">Отмена</string>
+
+    <string name="toastPassword">Пароли не совпадают!</string>
+
     <string name="male">Муж</string>
     <string name="female">Жен</string>
 
@@ -15,4 +20,5 @@
     <string name="characterNameLabel">Имя персонажа</string>
 
     <string name="namePageTitle">Назови своего персонажа</string>
+    <string name="typePageTitle">Выбери класс персонажа</string>
 </resources>

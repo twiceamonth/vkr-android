@@ -23,10 +23,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.presentation.feature.auth.components.AuthButton
-import ru.mav26.vkrapp.presentation.feature.auth.components.AuthTextField
+import ru.mav26.vkrapp.presentation.components.AuthTextField
+import ru.mav26.vkrapp.presentation.feature.auth.AuthViewModel
 
 @Composable
-fun LoginPage(modifier: Modifier = Modifier) {
+fun LoginPage(authViewModel: AuthViewModel, modifier: Modifier = Modifier) {
     var login by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -62,7 +63,7 @@ fun LoginPage(modifier: Modifier = Modifier) {
         AuthButton(
             text = stringResource(R.string.login),
             modifier = Modifier.width(164.dp).padding(bottom = 2.dp)
-        ) { /*TODO*/ }
+        ) { authViewModel.login(login, password) }
 
         TextButton(onClick = { /*TODO*/ }) {
             Text(
@@ -78,5 +79,5 @@ fun LoginPage(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun LoginPreview() {
-    LoginPage()
+    //LoginPage()
 }
