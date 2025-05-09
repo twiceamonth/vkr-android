@@ -20,18 +20,18 @@ class CharacterViewModel(
 
     /*todo: update character in state*/
 
-    fun getCharacter(userLogin: String) {
+    fun getCharacter() {
         /*todo: userlogin env*/
         viewModelScope.launch(Dispatchers.IO) {
-            val char = characterUseCase.getCharacter(userLogin)
+            val char = characterUseCase.getCharacter()
             _state.update { it.copy(character = char) }
         }
     }
 
-    fun getAllCharacters(userLogin: String) {
+    fun getAllCharacters() {
         /*todo: userlogin env*/
         viewModelScope.launch(Dispatchers.IO) {
-            val charList = characterUseCase.getAllCharacters(userLogin)
+            val charList = characterUseCase.getAllCharacters()
             _state.update { it.copy(allCharacters = charList) }
         }
     }

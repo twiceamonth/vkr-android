@@ -22,15 +22,15 @@ import ru.mav26.vkrapp.domain.repository.CharacterRepository
 class CharacterRepositoryImpl(
     private val client: HttpClient
 ) : CharacterRepository {
-    override suspend fun getCharacter(userLogin: String): Character {
+    override suspend fun getCharacter(): Character {
         val response: CharacterResponse =
-            client.get("/get-character/${userLogin}").body()
+            client.get("/get-character").body()
         return response.fromApi()
     }
 
-    override suspend fun getAllCharacters(userLogin: String): List<Character> {
+    override suspend fun getAllCharacters(): List<Character> {
         val response: List<CharacterResponse> =
-            client.get("/get-all-characters/${userLogin}").body()
+            client.get("/get-all-characters").body()
         return response.map { it.fromApi() }
     }
 
@@ -45,8 +45,8 @@ class CharacterRepositoryImpl(
         return response
     }
 
-    override suspend fun createCharacter(newCharacter: CharacterCreate, userLogin: String) {
-        val response = client.post("/create-character/${userLogin}") {
+    override suspend fun createCharacter(newCharacter: CharacterCreate) {
+        val response = client.post("/create-character") {
             contentType(ContentType.Application.Json)
             setBody(newCharacter.toApi())
         }
