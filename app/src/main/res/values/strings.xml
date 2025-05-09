@@ -11,6 +11,7 @@
 
     <string name="loginLabel">Логин</string>
     <string name="passwordLabel">Пароль</string>
+    <string name="passwordAgainLabel">Пароль еще раз</string>
     <string name="characterNameLabel">Имя персонажа</string>
 
     <string name="namePageTitle">Назови своего персонажа</string>
