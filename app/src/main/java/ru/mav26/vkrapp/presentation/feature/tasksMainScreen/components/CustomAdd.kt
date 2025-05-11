@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,13 +26,11 @@ import ru.mav26.vkrapp.presentation.theme.backgroundColor
 import ru.mav26.vkrapp.presentation.theme.mainColor
 
 @Composable
-fun CustomCheck(
+fun CustomAdd(
     color: Color,
     checked: Boolean,
     isTimer: Boolean,
-    isLast: Boolean = false,
-    roundedCorner: Dp,
-    onCheck: (Boolean) -> Unit,
+    onCheck: () -> Unit,
     onTimerStart: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -45,19 +42,14 @@ fun CustomCheck(
                 indication = null
             ) {
                 if (isTimer) {
-                    if (checked) onCheck(!checked) else onTimerStart()
-                } else onCheck(!checked)
+                    onTimerStart()
+                } else onCheck()
             }
             .height(70.dp)
             .width(50.dp)
             .background(
                 color = color,
-                shape = RoundedCornerShape(
-                    topStart = if (isLast) 0.dp else 10.dp,
-                    topEnd = if (isLast) 0.dp else 10.dp,
-                    bottomEnd = roundedCorner,
-                    bottomStart = roundedCorner
-                )
+                shape = RoundedCornerShape(10.dp)
             )
     ) {
         if (isTimer) {
@@ -82,14 +74,15 @@ fun CustomCheck(
                             .size(26.dp)
                     ) {
                         Icon(
-                            painter = if (checked) painterResource(R.drawable.check)
-                            else painterResource(R.drawable.start_timer),
+                            painter = if (!checked) painterResource(R.drawable.start_timer)
+                            else painterResource(R.drawable.add),
                             contentDescription = null,
                             tint = mainColor
                         )
                     }
                 }
-                if (!checked) {
+
+                if (!checked){
                     Text(
                         text = stringResource(R.string.start),
                         fontSize = 9.sp,
@@ -97,7 +90,8 @@ fun CustomCheck(
                     )
                 }
             }
-        } else {
+        }
+        else {
             Box(
                 modifier = Modifier
                     .background(
@@ -115,21 +109,15 @@ fun CustomCheck(
                         )
                         .size(26.dp)
                 ) {
-                    if (checked) {
-                        Icon(
-                            painter = painterResource(R.drawable.check),
-                            contentDescription = null,
-                            tint = mainColor
-                        )
-                    }
+                    Icon(
+                        painter = if (checked) painterResource(R.drawable.check)
+                        else painterResource(R.drawable.add),
+                        contentDescription = null,
+                        tint = mainColor
+                    )
+
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun ccprev() {
-    CustomCheck(Color.Red, true, false, false, 5.dp, {}, {})
 }

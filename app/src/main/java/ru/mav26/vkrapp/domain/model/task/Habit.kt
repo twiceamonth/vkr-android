@@ -7,7 +7,7 @@ data class Habit(
     val title: String,
     val difficulty: String,
     val frequency: String,
-    val timerInterval: LocalTime,
+    val timerInterval: LocalTime?,
     val description: String,
     val streakCount: Int
 )
