@@ -8,6 +8,7 @@
 
     <string name="choose">Выбрать</string>
     <string name="cansel">Отмена</string>
+    <string name="start">Начать</string>
 
     <string name="toastPassword">Пароли не совпадают!</string>
 
@@ -21,4 +22,12 @@
 
     <string name="namePageTitle">Назови своего персонажа</string>
     <string name="typePageTitle">Выбери класс персонажа</string>
+
+    <string name="low">🐢</string>
+    <string name="medium">⏰</string>
+    <string name="high">🔥</string>
+    
+    <string name="daily">Каждый день</string>
+    <string name="weekly">Каждую неделю</string>
+    <string name="monthly">Каждый месяц</string>
 </resources>

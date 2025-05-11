@@ -55,6 +55,7 @@ fun TypePage(
             onContinue = {
                 createCharacterViewModel.changeType(selectedItem!!.characterType)
                 createCharacterViewModel.createCharacter()
+                /* TODO: navigation*/
             },
             onDismiss = {
                 showDialog = false
