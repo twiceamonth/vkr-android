@@ -1,9 +1,15 @@
 package ru.mav26.vkrapp.presentation.feature.tasksMainScreen.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntSizeAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -65,7 +71,7 @@ import java.time.format.DateTimeFormatter
 fun TaskCard(
     task: Task,
     onStatusChange: (Boolean) -> Unit,
-    onSubStatusChange: (Boolean) -> Unit,
+    onSubStatusChange: (Boolean, String) -> Unit,
     onTimerStart: () -> Unit,
     onCardClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -96,259 +102,214 @@ fun TaskCard(
         else -> ""
     }
 
-    LazyColumn {
-        item {
-            Box(
-                modifier = modifier
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null
-                    ) { onCardClick() }
-                    .fillMaxWidth()
-                    .height(70.dp)
-                    .background(
-                        color = cardColor.copy(alpha = 0.5f),
-                        shape = RoundedCornerShape(
-                            topStart = 10.dp,
-                            topEnd = 10.dp,
-                            bottomEnd = roundedCorner,
-                            bottomStart = roundedCorner
-                        )
+    Column(
+        modifier = Modifier.animateContentSize()
+    ) {
+        Box(
+            modifier = modifier
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null
+                ) { onCardClick() }
+                .fillMaxWidth()
+                .height(70.dp)
+                .background(
+                    color = cardColor.copy(alpha = 0.5f),
+                    shape = RoundedCornerShape(
+                        topStart = 10.dp,
+                        topEnd = 10.dp,
+                        bottomEnd = roundedCorner,
+                        bottomStart = roundedCorner
                     )
+                )
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth()
+                CustomCheck(
+                    color = cardColor,
+                    checked = task.status,
+                    isTimer = (task.timerInterval != null),
+                    roundedCorner = roundedCorner,
+                    onCheck = { onStatusChange(it) },
+                    onTimerStart = { if (task.timerInterval != null) onTimerStart() }
+                )
+
+                Column(
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .padding(
+                            top = 10.dp,
+                            start = 8.dp,
+                            end = 8.dp,
+                            bottom = 4.dp
+                        )
                 ) {
-                    CustomCheck(
-                        color = cardColor,
-                        checked = task.status,
-                        isTimer = (task.timerInterval != null),
-                        roundedCorner = roundedCorner,
-                        onCheck = { onStatusChange(it) },
-                        onTimerStart = { if (task.timerInterval != null) onTimerStart() }
-                    )
+                    Column {
+                        Text(
+                            text = task.title,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold
+                        )
 
-                    Column(
-                        verticalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxHeight()
-                            .padding(
-                                top = 10.dp,
-                                start = 8.dp,
-                                end = 8.dp,
-                                bottom = 4.dp
-                            )
-                    ) {
-                        Column {
-                            Text(
-                                text = task.title,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            )
+                        Spacer(Modifier.height(4.dp))
 
-                            Spacer(Modifier.height(4.dp))
-
-                            Text(
-                                text = task.description,
-                                fontSize = 12.sp,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
-
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            if (task.frequency != "") {
-                                val title = when (task.frequency) {
-                                    "day" -> stringResource(R.string.daily)
-                                    "week" -> stringResource(R.string.weekly)
-                                    "month" -> stringResource(R.string.monthly)
-                                    else -> ""
-                                }
-
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
-                                ) {
-                                    Icon(
-                                        painter = painterResource(R.drawable.replays),
-                                        contentDescription = null,
-                                        tint = mainColor.copy(alpha = 0.5f),
-                                        modifier = Modifier.size(14.dp)
-                                    )
-
-                                    Spacer(Modifier.width(4.dp))
-
-                                    Text(
-                                        text = title,
-                                        fontSize = 12.sp,
-                                        lineHeight = 14.sp,
-                                        color = mainColor.copy(alpha = 0.5f)
-                                    )
-                                }
-                            }
-
-                            if (task.endTime != null) {
-                                val day =
-                                    if (task.endTime.dayOfMonth < 10) "0${task.endTime.dayOfMonth}"
-                                    else "${task.endTime.dayOfMonth}"
-
-                                val month =
-                                    if (task.endTime.monthValue < 10) "0${task.endTime.monthValue}"
-                                    else "${task.endTime.monthValue}"
-
-                                val formatedDate = "${day}.${month}"
-
-                                Row {
-                                    Icon(
-                                        painter = painterResource(R.drawable.calendar),
-                                        contentDescription = null,
-                                        tint = mainColor.copy(alpha = 0.5f),
-                                        modifier = Modifier.size(14.dp)
-                                    )
-
-                                    Spacer(Modifier.width(4.dp))
-
-                                    Text(
-                                        text = formatedDate,
-                                        fontSize = 12.sp,
-                                        lineHeight = 14.sp,
-                                        color = mainColor.copy(alpha = 0.5f)
-                                    )
-                                }
-                            }
-
-                            if (task.timerInterval != null) {
-                                val tHour = if (task.timerInterval.hour > 0) {
-                                    if (task.timerInterval.hour < 10) "0${task.timerInterval.hour}:"
-                                    else "${task.timerInterval.hour}:"
-                                } else ""
-
-                                val tHMin =
-                                    if (task.timerInterval.minute < 10) "0${task.timerInterval.minute}:"
-                                    else "${task.timerInterval.minute}:"
-
-                                val tSec = if (task.timerInterval.second > 0) {
-                                    if (task.timerInterval.second < 10) "0${task.timerInterval.second}"
-                                    else "${task.timerInterval.second}"
-                                } else ""
-
-
-                                val timerValue = "${tHour}${tHMin}${tSec}"
-
-                                Row {
-                                    Icon(
-                                        painter = painterResource(R.drawable.timer),
-                                        contentDescription = null,
-                                        tint = mainColor.copy(alpha = 0.5f),
-                                        modifier = Modifier.size(14.dp)
-                                    )
-
-                                    Spacer(Modifier.width(4.dp))
-
-                                    Text(
-                                        text = timerValue,
-                                        fontSize = 12.sp,
-                                        lineHeight = 14.sp,
-                                        color = mainColor.copy(alpha = 0.5f)
-                                    )
-                                }
-                            }
-                        }
+                        Text(
+                            text = task.description,
+                            fontSize = 12.sp,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
                     }
 
-                    IconButton(
-                        onClick = { expanded = !expanded },
-                        modifier = Modifier
-                            .fillMaxHeight()
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Icon(
-                            painter = painterResource(R.drawable.subtask_expand),
-                            contentDescription = null,
-                            modifier = Modifier.rotate(degree)
-                        )
+                        if (task.frequency != "") {
+                            val title = when (task.frequency) {
+                                "day" -> stringResource(R.string.daily)
+                                "week" -> stringResource(R.string.weekly)
+                                "month" -> stringResource(R.string.monthly)
+                                else -> ""
+                            }
+
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                            ) {
+                                Icon(
+                                    painter = painterResource(R.drawable.replays),
+                                    contentDescription = null,
+                                    tint = mainColor.copy(alpha = 0.5f),
+                                    modifier = Modifier.size(14.dp)
+                                )
+
+                                Spacer(Modifier.width(4.dp))
+
+                                Text(
+                                    text = title,
+                                    fontSize = 9.sp,
+                                    lineHeight = 14.sp,
+                                    color = mainColor.copy(alpha = 0.5f)
+                                )
+                            }
+                        }
+
+                        if (task.endTime != null) {
+                            val day =
+                                if (task.endTime.dayOfMonth < 10) "0${task.endTime.dayOfMonth}"
+                                else "${task.endTime.dayOfMonth}"
+
+                            val month =
+                                if (task.endTime.monthValue < 10) "0${task.endTime.monthValue}"
+                                else "${task.endTime.monthValue}"
+
+                            val formatedDate = "${day}.${month}"
+
+                            Row {
+                                Icon(
+                                    painter = painterResource(R.drawable.calendar),
+                                    contentDescription = null,
+                                    tint = mainColor.copy(alpha = 0.5f),
+                                    modifier = Modifier.size(14.dp)
+                                )
+
+                                Spacer(Modifier.width(4.dp))
+
+                                Text(
+                                    text = formatedDate,
+                                    fontSize = 9.sp,
+                                    lineHeight = 14.sp,
+                                    color = mainColor.copy(alpha = 0.5f)
+                                )
+                            }
+                        }
+
+                        if (task.timerInterval != null) {
+                            val tHour = if (task.timerInterval.hour > 0) {
+                                if (task.timerInterval.hour < 10) "0${task.timerInterval.hour}:"
+                                else "${task.timerInterval.hour}:"
+                            } else ""
+
+                            val tHMin =
+                                if (task.timerInterval.minute < 10) "0${task.timerInterval.minute}:"
+                                else "${task.timerInterval.minute}:"
+
+                            val tSec = if (task.timerInterval.second > 0) {
+                                if (task.timerInterval.second < 10) "0${task.timerInterval.second}"
+                                else "${task.timerInterval.second}"
+                            } else "00"
+
+
+                            val timerValue = "${tHour}${tHMin}${tSec}"
+
+                            Row {
+                                Icon(
+                                    painter = painterResource(R.drawable.timer),
+                                    contentDescription = null,
+                                    tint = mainColor.copy(alpha = 0.5f),
+                                    modifier = Modifier.size(14.dp)
+                                )
+
+                                Spacer(Modifier.width(4.dp))
+
+                                Text(
+                                    text = timerValue,
+                                    fontSize = 9.sp,
+                                    lineHeight = 14.sp,
+                                    color = mainColor.copy(alpha = 0.5f)
+                                )
+                            }
+                        }
                     }
                 }
 
-                Box(
+                IconButton(
+                    onClick = { expanded = !expanded },
                     modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .offset(x = 20.dp, y = (-18).dp)
-                        .graphicsLayer {
-                            clip = false
-                        }
-                        .rotate(20f)
-                        .padding(4.dp)
+                        .fillMaxHeight()
                 ) {
-                    Text(
-                        text = cardEmote,
-                        fontSize = 32.sp,
-                        modifier = Modifier.padding(4.dp)
+                    Icon(
+                        painter = painterResource(R.drawable.subtask_expand),
+                        contentDescription = null,
+                        modifier = Modifier.rotate(degree)
                     )
                 }
             }
-        }
+
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .offset(x = 20.dp, y = (-18).dp)
+                    .graphicsLayer {
+                        clip = false
+                    }
+                    .rotate(20f)
+                    .padding(4.dp)
+            ) {
+                Text(
+                    text = cardEmote,
+                    fontSize = 32.sp,
+                    modifier = Modifier.padding(4.dp)
+                )
+            }
+        }}
 
         if (task.subtasks.isNotEmpty() and expanded) {
-            itemsIndexed(
-                items = task.subtasks,
-            ) { index, subtask ->
+            task.subtasks.forEachIndexed { index, subtask ->
                 Box(
                     modifier = Modifier
-                        .animateItem()
                         .alpha(animateFloatAsState(if (expanded) 1f else 0f).value)
                         .fillMaxWidth()
                 ) {
                     val rounded = if (task.subtasks.count() - 1 != index) roundedCorner else 10.dp
                     val isLast = task.subtasks.count() != index
-                    SubtaskCard(subtask, cardColor, rounded, isLast) { onSubStatusChange(it) }
+                    SubtaskCard(subtask, cardColor, rounded, isLast) { b, i -> onSubStatusChange(b, i) }
                 }
-            }
         }
     }
 
-}
-
-@Preview
-@Composable
-private fun tcprev() {
-    TaskCard(
-        Task(
-            taskId = "TODO()",
-            title = "TODO()",
-            endTime = OffsetDateTime.now(),
-            difficulty = "hard",
-            priority = "low",
-            frequency = "week",
-            status = false,
-            timerInterval = LocalTime.of(10, 34, 2),
-            description = "TODO(qweqwrfewjfhdsvfjdsfvsdjkhfvqweqwewqeqweqwsdfjsdfsdfvsdjfsdfsdfd)",
-            subtasks = listOf(
-                Subtask(
-                    subtaskId = "TODO()",
-                    title = "TODO()",
-                    status = false,
-                    taskId = "TODO()"
-                ), Subtask(
-                    subtaskId = "TODO()",
-                    title = "TODO()",
-                    status = false,
-                    taskId = "TODO()"
-                ), Subtask(
-                    subtaskId = "TODO()",
-                    title = "TODO()",
-                    status = false,
-                    taskId = "TODO()"
-                ), Subtask(
-                    subtaskId = "TODO()",
-                    title = "TODO()",
-                    status = false,
-                    taskId = "TODO()"
-                )
-            )
-        ), {}, {}, {}, {}
-    )
 }

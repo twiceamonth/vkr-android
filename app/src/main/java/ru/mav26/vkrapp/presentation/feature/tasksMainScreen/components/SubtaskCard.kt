@@ -15,13 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.domain.model.task.Subtask
 import ru.mav26.vkrapp.presentation.theme.defaultCard
-import ru.mav26.vkrapp.presentation.theme.hardCard
 
 @Composable
 fun SubtaskCard(
@@ -30,7 +28,7 @@ fun SubtaskCard(
     roundedCorner: Dp,
     isLast: Boolean,
     modifier: Modifier = Modifier,
-    onStatusChange: (Boolean) -> Unit,
+    onStatusChange: (Boolean, String) -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -55,7 +53,7 @@ fun SubtaskCard(
                 isTimer = false,
                 isLast = isLast,
                 roundedCorner = if (isLast) roundedCorner else 10.dp,
-                onCheck = { onStatusChange(it) },
+                onCheck = { onStatusChange(it, subtask.subtaskId) },
                 onTimerStart = { null }
             )
 
@@ -75,17 +73,4 @@ fun SubtaskCard(
         }
 
     }
-}
-
-@Preview
-@Composable
-private fun scprev() {
-    SubtaskCard(
-        Subtask(
-            subtaskId = "TODO()",
-            title = "TODO()",
-            status = false,
-            taskId = "TODO()"
-        ), hardCard, 10.dp, false
-    ) {}
 }
