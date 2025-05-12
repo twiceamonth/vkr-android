@@ -13,6 +13,5 @@ data class TaskEdit(
     val timerInterval: LocalTime? = null,
     val description: String? = null,
     val finishedAt: OffsetDateTime? = null,
-    val subtasks: List<String> = emptyList(),
-    val userLogin: String
+    val subtasks: List<String> = emptyList()
 )

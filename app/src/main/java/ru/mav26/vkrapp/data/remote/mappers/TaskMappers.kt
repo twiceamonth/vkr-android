@@ -65,7 +65,8 @@ fun HabitListResponse.fromApi(): Habit {
         frequency = this.frequency,
         timerInterval = LocalTime.parse(this.timerInterval),
         description = this.description,
-        streakCount = this.streakCount
+        streakCount = this.streakCount,
+        lastPerformed = this.lastPerformed
     )
 }
 
@@ -204,7 +205,6 @@ fun TaskEdit.toApi(): ru.mav26.vkrapp.data.remote.models.tasks.TaskEdit {
         timerInterval = this.timerInterval.toString(),
         description = this.description,
         finishedAt = this.finishedAt.toString(),
-        subtasks = this.subtasks.map { SubtaskCreate(title = it) },
-        userLogin = this.userLogin
+        subtasks = this.subtasks.map { SubtaskCreate(title = it) }
     )
 }

@@ -9,5 +9,6 @@ data class Habit(
     val frequency: String,
     val timerInterval: LocalTime?,
     val description: String,
-    val streakCount: Int
+    val streakCount: Int,
+    val lastPerformed: String
 )

@@ -214,7 +214,8 @@ private fun hcprev() {
             frequency = "week",
             timerInterval = null,
             description = "TODO()",
-            streakCount = 1
+            streakCount = 1,
+            lastPerformed = ""
         ),
         onStatusChange = {},
         onCardClick = {},
