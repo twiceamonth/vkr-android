@@ -7,6 +7,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
+import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.data.local.TokenDataStoreManager
 import ru.mav26.vkrapp.data.remote.AccessTokenInterceptor
 import ru.mav26.vkrapp.data.remote.TokenRefreshInterceptor
@@ -38,7 +39,7 @@ val dataModule = module {
                 json()
             }
             install(DefaultRequest) {
-                url("http://localhost:8000")
+                url(Constants.BASE_URL)
             }
             install(get<TokenRefreshInterceptor>())
             install(get<AccessTokenInterceptor>())

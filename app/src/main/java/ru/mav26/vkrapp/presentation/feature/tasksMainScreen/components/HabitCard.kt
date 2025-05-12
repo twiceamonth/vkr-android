@@ -29,13 +29,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
+import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.domain.model.task.Habit
 import ru.mav26.vkrapp.presentation.theme.defaultCard
 import ru.mav26.vkrapp.presentation.theme.easyCard
 import ru.mav26.vkrapp.presentation.theme.hardCard
 import ru.mav26.vkrapp.presentation.theme.mainColor
 import ru.mav26.vkrapp.presentation.theme.mediumCard
-import java.time.LocalTime
 
 @Composable
 fun HabitCard(
@@ -47,9 +47,9 @@ fun HabitCard(
     modifier: Modifier = Modifier,
 ) {
     val cardColor = when (habit.difficulty) {
-        "easy" -> easyCard
-        "medium" -> mediumCard
-        "hard" -> hardCard
+        Constants.DIFFICULTY_EASY -> easyCard
+        Constants.DIFFICULTY_MEDIUM -> mediumCard
+        Constants.DIFFICULTY_HARD -> hardCard
         else -> defaultCard
     }
 
@@ -112,9 +112,9 @@ fun HabitCard(
                 ) {
                     if (habit.frequency != "") {
                         val title = when (habit.frequency) {
-                            "day" -> stringResource(R.string.daily)
-                            "week" -> stringResource(R.string.weekly)
-                            "month" -> stringResource(R.string.monthly)
+                            Constants.FREQUENCY_DAILY -> stringResource(R.string.daily)
+                            Constants.FREQUENCY_WEEKLY -> stringResource(R.string.weekly)
+                            Constants.FREQUENCY_MONTHLY -> stringResource(R.string.monthly)
                             else -> ""
                         }
 

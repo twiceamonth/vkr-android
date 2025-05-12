@@ -22,9 +22,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.NavTab
 import ru.mav26.vkrapp.presentation.theme.backgroundColor
 import ru.mav26.vkrapp.presentation.theme.mainColor
@@ -37,42 +39,20 @@ fun NavTabItem(
     modifier: Modifier = Modifier,
 ) {
     val cornerShape = when (tab.id) {
-        "tasks" -> RoundedCornerShape(
-            topStart = 15.dp,
-            topEnd = 15.dp,
-            bottomEnd = 15.dp,
-            bottomStart = 0.dp
-        )
+        Constants.Tabs.ASSIGNMENTS -> RoundedCornerShape(bottomStart = 15.dp)
 
-        "assignments" -> RoundedCornerShape(
-            topStart = 0.dp,
-            topEnd = 15.dp,
-            bottomEnd = 15.dp,
-            bottomStart = 15.dp
-        )
+        Constants.Tabs.INVENTORY -> RoundedCornerShape(bottomEnd = 15.dp)
 
-        "habits" -> RoundedCornerShape(
-            topStart = 15.dp,
-            topEnd = 15.dp,
-            bottomEnd = 0.dp,
-            bottomStart = 0.dp
-        )
-
-        "inventory" -> RoundedCornerShape(
-            topStart = 15.dp,
-            topEnd = 0.dp,
-            bottomEnd = 15.dp,
-            bottomStart = 0.dp
-        )
-
-        else -> RoundedCornerShape(15.dp)
+        else -> RoundedCornerShape(topStart = 15.dp, topEnd = 15.dp)
     }
 
-    val arrangment = if (tab.id in listOf("tasks", "assignments")) Arrangement.Start
-    else Arrangement.End
+    val arrangment =
+        if (tab.id in listOf(Constants.Tabs.TASKS, Constants.Tabs.ASSIGNMENTS)) Arrangement.Start
+        else Arrangement.End
 
-    val padding = if (tab.id in listOf("tasks", "assignments")) PaddingValues(start = 12.dp)
-    else PaddingValues(end = 12.dp)
+    val padding =
+        if (tab.id in listOf(Constants.Tabs.TASKS,Constants.Tabs.ASSIGNMENTS)) PaddingValues(start = 12.dp)
+        else PaddingValues(end = 12.dp)
 
     Box(
         modifier = modifier
@@ -102,7 +82,7 @@ fun NavTabItem(
                 .padding(padding)
         ) {
             Icon(
-                painter = tab.icon,
+                painter = painterResource(tab.icon),
                 tint = if (selected) backgroundColor else mainColor,
                 contentDescription = null,
                 modifier = Modifier.size(24.dp)
