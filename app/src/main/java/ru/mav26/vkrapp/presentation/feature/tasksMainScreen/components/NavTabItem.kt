@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.app.Constants
+import ru.mav26.vkrapp.app.Constants.Tabs
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.NavTab
 import ru.mav26.vkrapp.presentation.theme.backgroundColor
 import ru.mav26.vkrapp.presentation.theme.mainColor
@@ -47,11 +48,11 @@ fun NavTabItem(
     }
 
     val arrangment =
-        if (tab.id in listOf(Constants.Tabs.TASKS, Constants.Tabs.ASSIGNMENTS)) Arrangement.Start
+        if (tab.id in listOf(Constants.Tabs.TASKS, Constants.Tabs.ASSIGNMENTS, Constants.Tabs.ACHIEVEMENTS)) Arrangement.Start
         else Arrangement.End
 
     val padding =
-        if (tab.id in listOf(Constants.Tabs.TASKS,Constants.Tabs.ASSIGNMENTS)) PaddingValues(start = 12.dp)
+        if (tab.id in listOf(Constants.Tabs.TASKS,Constants.Tabs.ASSIGNMENTS, Constants.Tabs.ACHIEVEMENTS)) PaddingValues(start = 12.dp)
         else PaddingValues(end = 12.dp)
 
     Box(

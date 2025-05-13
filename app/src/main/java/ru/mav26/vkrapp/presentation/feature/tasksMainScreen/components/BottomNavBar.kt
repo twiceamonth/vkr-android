@@ -20,6 +20,7 @@ import ru.mav26.vkrapp.presentation.theme.backgroundColor
 @Composable
 fun BottomNavBar(
     topTabs: List<NavTab>,
+    topTabs2: List<NavTab>,
     bottomTabs: List<NavTab>,
     selectedTab: NavTab,
     onTabSelected: (NavTab) -> Unit,
@@ -41,8 +42,22 @@ fun BottomNavBar(
                     .fillMaxHeight()
                     .weight(0.5f)
             ) {
-                if (selectedTab.id != Constants.Tabs.INVENTORY){
+                if (selectedTab.id !in listOf(
+                        Constants.Tabs.INVENTORY,
+                        Constants.Tabs.ACHIEVEMENTS,
+                        Constants.Tabs.STATISTICS
+                    )
+                ) {
                     topTabs.forEach { tab ->
+                        NavTabItem(
+                            tab = tab,
+                            selected = tab.id == selectedTab.id,
+                            onClick = { onTabSelected(it) },
+                            modifier = Modifier.weight(0.5f)
+                        )
+                    }
+                } else {
+                    topTabs2.forEach { tab ->
                         NavTabItem(
                             tab = tab,
                             selected = tab.id == selectedTab.id,

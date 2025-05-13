@@ -13,6 +13,11 @@ object Constants {
         NavTab("Привычки", R.drawable.calendar, Tabs.HABITS)
     )
 
+    val topTabs2 = listOf(
+        NavTab("Трофеи", R.drawable.trophy, Tabs.ACHIEVEMENTS),
+        NavTab("Статистика", R.drawable.statistics, Tabs.STATISTICS)
+    )
+
     val bottomTabs = listOf(
         NavTab("Задания", R.drawable.task_tab, Tabs.ASSIGNMENTS),
         NavTab("Инвентарь", R.drawable.work, Tabs.INVENTORY)
@@ -23,6 +28,8 @@ object Constants {
         const val HABITS = "habits"
         const val ASSIGNMENTS = "assignments"
         const val INVENTORY = "inventory"
+        const val STATISTICS = "statistics"
+        const val ACHIEVEMENTS = "achievements"
     }
 
     /*          Tasks and Habits properties          */
