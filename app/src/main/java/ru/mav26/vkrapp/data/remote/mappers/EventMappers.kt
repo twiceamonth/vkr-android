@@ -2,7 +2,7 @@ package ru.mav26.vkrapp.data.remote.mappers
 
 import ru.mav26.vkrapp.data.remote.models.events.ActiveEventResponse
 import ru.mav26.vkrapp.domain.model.events.ActiveEvent
-import java.sql.Date
+import java.time.OffsetDateTime
 
 fun ActiveEventResponse.fromApi() : ActiveEvent {
     return ActiveEvent(
@@ -14,7 +14,7 @@ fun ActiveEventResponse.fromApi() : ActiveEvent {
         exp = this.exp,
         criteriaType = this.criteriaType,
         criteriaValue = this.criteriaValue,
-        endDate = Date.valueOf(this.endDate),
+        endDate = OffsetDateTime.parse(this.endDate),
         isCompleted = this.isCompleted,
         progress = this.progress
     )

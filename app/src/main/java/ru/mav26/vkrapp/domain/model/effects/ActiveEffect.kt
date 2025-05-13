@@ -1,10 +1,10 @@
 package ru.mav26.vkrapp.domain.model.effects
 
-import java.util.Date
+import java.time.OffsetDateTime
 
 data class ActiveEffect(
     val activeEffectId: String,
-    val endDate: Date,
+    val endDate: OffsetDateTime,
     val isCompleted: Boolean,
     val effectName: String,
     val description: String,

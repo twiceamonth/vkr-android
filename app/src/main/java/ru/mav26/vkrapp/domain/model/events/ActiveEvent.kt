@@ -1,5 +1,6 @@
 package ru.mav26.vkrapp.domain.model.events
 
+import java.time.OffsetDateTime
 import java.util.Date
 
 data class ActiveEvent(
@@ -11,7 +12,7 @@ data class ActiveEvent(
     val exp: Int,
     val criteriaType: String,
     val criteriaValue: Int,
-    val endDate: Date,
+    val endDate: OffsetDateTime,
     val isCompleted: Boolean,
     val progress: Int
 )
