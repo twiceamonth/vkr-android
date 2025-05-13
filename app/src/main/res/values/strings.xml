@@ -30,4 +30,8 @@
     <string name="daily">Каждый день</string>
     <string name="weekly">Каждую неделю</string>
     <string name="monthly">Каждый месяц</string>
+
+    <string name="health">Здоровье</string>
+    <string name="exp">Опыт</string>
+    <string name="stress">Стресс</string>
 </resources>
