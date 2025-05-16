@@ -23,10 +23,9 @@ class InventoryViewModel(
         }
     }
 
-    fun getInventory(userLogin: String) {
-        /* todo: получение логина из переменной окружения */
+    fun getInventory() {
         viewModelScope.launch(Dispatchers.IO) {
-            val inventory = storeUseCase.getInventory(userLogin)
+            val inventory = storeUseCase.getInventory()
             _state.update { it.copy(inventoryItems = inventory) }
         }
     }

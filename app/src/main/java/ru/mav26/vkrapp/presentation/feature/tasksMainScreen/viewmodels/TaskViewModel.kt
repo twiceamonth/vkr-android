@@ -23,18 +23,18 @@ class TaskViewModel(
     private val _state = MutableStateFlow(TasksState())
     val state: StateFlow<TasksState> = _state
 
-    fun getTasks(userLogin: String) {
-        /*todo: userlogin env*/
+    /*TODO: ADD TIMER STARTER*/
+
+    fun getTasks() {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = taskUseCase.getTasks(userLogin)
+            val list = taskUseCase.getTasks()
             _state.update { it.copy(tasks = list) }
         }
     }
 
-    fun getHabits(userLogin: String) {
-        /*todo: userlogin env*/
+    fun getHabits() {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = taskUseCase.getHabits(userLogin)
+            val list = taskUseCase.getHabits()
             _state.update { it.copy(habits = list) }
         }
     }
@@ -53,15 +53,15 @@ class TaskViewModel(
         }
     }
 
-    fun createTask(task: TaskCreate, userLogin: String) {
+    fun createTask(task: TaskCreate) {
         viewModelScope.launch(Dispatchers.IO) {
-            taskUseCase.createTask(task, userLogin)
+            taskUseCase.createTask(task)
         }
     }
 
-    fun createHabit(habit: HabitCreate, userLogin: String) {
+    fun createHabit(habit: HabitCreate) {
         viewModelScope.launch(Dispatchers.IO) {
-            taskUseCase.createHabit(habit, userLogin)
+            taskUseCase.createHabit(habit)
         }
     }
 

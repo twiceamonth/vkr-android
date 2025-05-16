@@ -14,15 +14,15 @@ import ru.mav26.vkrapp.domain.repository.StoreRepository
 class StoreRepositoryImpl(
     private val client: HttpClient
 ) : StoreRepository {
-    override suspend fun getItemsList(type: String, userLogin: String): List<StoreItem> {
+    override suspend fun getItemsList(type: String): List<StoreItem> {
         val response: List<StoreItemsResponse> =
-            client.get("/store-items-list/${userLogin}/${type}").body()
+            client.get("/store-items-list/${type}").body()
         return response.map { it.fromApi() }
     }
 
-    override suspend fun getInventory(userLogin: String): List<Inventory> {
+    override suspend fun getInventory(): List<Inventory> {
         val response: List<InventoryResponse> =
-            client.get("/inventory/${userLogin}").body()
+            client.get("/inventory").body()
         return response.map { it.fromApi() }
     }
 
@@ -30,8 +30,8 @@ class StoreRepositoryImpl(
         val response = client.post("/heal-button/${characterId}")
     }
 
-    override suspend fun buyItem(storeId: String, userLogin: String) {
-        val response = client.post("/buy-item/${userLogin}/${storeId}")
+    override suspend fun buyItem(storeId: String) {
+        val response = client.post("/buy-item/${storeId}")
     }
 
 }

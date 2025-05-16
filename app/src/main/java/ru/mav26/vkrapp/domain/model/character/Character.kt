@@ -16,6 +16,7 @@ data class Character(
     val maxHp: Int,
     val currentHp: Int,
     val exp: Int,
+    val expToNextLvl: Int,
     val coins: Int,
     val mood: Int,
     val stressCoef: Int,

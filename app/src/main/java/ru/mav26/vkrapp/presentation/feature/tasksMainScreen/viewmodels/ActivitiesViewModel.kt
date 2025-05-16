@@ -20,16 +20,16 @@ class ActivitiesViewModel(
     private val _state = MutableStateFlow(ActivitiesState())
     val state: StateFlow<ActivitiesState> = _state
 
-    fun getActiveBoss(userLogin: String) {
+    fun getActiveBoss() {
         viewModelScope.launch(Dispatchers.IO) {
-            val ab = bossesUseCase.getActiveBoss(userLogin)
+            val ab = bossesUseCase.getActiveBoss()
             _state.update { it.copy(boss = ab) }
         }
     }
 
-    fun makeBossDamage(userLogin: String, taskDiff: String) {
+    fun makeBossDamage(taskDiff: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            bossesUseCase.makeDamage(userLogin, taskDiff)
+            bossesUseCase.makeDamage(taskDiff)
         }
     }
 
@@ -40,16 +40,16 @@ class ActivitiesViewModel(
         }
     }
 
-    fun getActiveEvent(userLogin: String) {
+    fun getActiveEvent() {
         viewModelScope.launch(Dispatchers.IO) {
-            val ae = eventsUseCase.getActiveEvent(userLogin)
+            val ae = eventsUseCase.getActiveEvent()
             _state.update { it.copy(event = ae) }
         }
     }
 
-    fun updateProgress(activeEventId: String, userLogin: String, type: String) {
+    fun updateProgress(activeEventId: String, type: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            eventsUseCase.updateProgress(activeEventId, userLogin, type)
+            eventsUseCase.updateProgress(activeEventId, type)
         }
     }
 }

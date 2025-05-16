@@ -12,14 +12,14 @@ import ru.mav26.vkrapp.domain.repository.BossesRepository
 class BossesRepositoryImpl(
     private val client: HttpClient
 ) : BossesRepository {
-    override suspend fun getActiveBoss(userLogin: String): ActiveBoss? {
+    override suspend fun getActiveBoss(): ActiveBoss? {
         val response: ActiveBossResponse =
-            client.get("/get-active-boss/${userLogin}").body()
+            client.get("/get-active-boss").body()
         return response.fromApi()
     }
 
-    override suspend fun makeDamage(userLogin: String, taskDiff: String) {
-        val response = client.post("/make-damage/${userLogin}/${taskDiff}")
+    override suspend fun makeDamage(taskDiff: String) {
+        val response = client.post("/make-damage/${taskDiff}")
     }
 
 }

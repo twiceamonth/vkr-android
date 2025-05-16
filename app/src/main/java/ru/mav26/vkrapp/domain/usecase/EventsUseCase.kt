@@ -6,11 +6,11 @@ import ru.mav26.vkrapp.domain.repository.EventsRepository
 class EventsUseCase(
     private val eventsRepository: EventsRepository
 ) {
-    suspend fun getActiveEvent(userLogin: String) : ActiveEvent? {
-        return eventsRepository.getActiveEvent(userLogin)
+    suspend fun getActiveEvent() : ActiveEvent? {
+        return eventsRepository.getActiveEvent()
     }
 
-    suspend fun updateProgress(activeEventId: String, userLogin: String, type: String) {
-        return eventsRepository.updateEventProgress(activeEventId, userLogin, type)
+    suspend fun updateProgress(activeEventId: String, type: String) {
+        return eventsRepository.updateEventProgress(activeEventId, type)
     }
 }

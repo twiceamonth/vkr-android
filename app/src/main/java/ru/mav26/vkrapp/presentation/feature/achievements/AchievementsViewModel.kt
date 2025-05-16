@@ -22,32 +22,28 @@ class AchievementsViewModel(
         }
     }
 
-    fun getAchievementsProgress(userLogin: String) {
-        /* todo: получение логина из переменной окружения */
+    fun getAchievementsProgress() {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = achievementsUseCase.getAchievementsProgress(userLogin)
+            val list = achievementsUseCase.getAchievementsProgress()
             _state.update { it.copy(achievementsProgress = list) }
         }
     }
 
-    fun updateProgress(progressId: String, userLogin: String) {
-        /* todo: получение логина из переменной окружения */
+    fun updateProgress(progressId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            achievementsUseCase.updateProgress(progressId, userLogin)
+            achievementsUseCase.updateProgress(progressId)
         }
     }
 
-    fun startProgress(userLogin: String, achievementId: String) {
-        /* todo: получение логина из переменной окружения */
+    fun startProgress(achievementId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            achievementsUseCase.startProgress(userLogin, achievementId)
+            achievementsUseCase.startProgress(achievementId)
         }
     }
 
-    fun resetProgress(progressId: String, userLogin: String) {
-        /* todo: получение логина из переменной окружения */
+    fun resetProgress(progressId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            achievementsUseCase.resetProgress(progressId, userLogin)
+            achievementsUseCase.resetProgress(progressId)
         }
     }
 }

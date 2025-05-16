@@ -154,14 +154,12 @@ fun HabitCreate.toApi(): ru.mav26.vkrapp.data.remote.models.tasks.HabitCreate {
         difficulty = this.difficulty,
         frequency = this.frequency,
         timerInterval = this.timerInterval,
-        description = this.description,
-        userLogin = this.userLogin
+        description = this.description
     )
 }
 
 fun HabitEdit.toApi(): ru.mav26.vkrapp.data.remote.models.tasks.HabitEdit {
     return ru.mav26.vkrapp.data.remote.models.tasks.HabitEdit(
-        userLogin = this.userLogin,
         title = this.title,
         difficulty = this.difficulty,
         frequency = this.frequency,
@@ -189,8 +187,7 @@ fun TaskCreate.toApi(): ru.mav26.vkrapp.data.remote.models.tasks.TaskCreate {
         details = this.details.map { it.toApi() },
         timerInterval = this.timerInterval.toString(),
         description = this.description,
-        subtasks = this.subtasks,
-        userLogin = this.userLogin
+        subtasks = this.subtasks
     )
 }
 

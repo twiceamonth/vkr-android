@@ -4,7 +4,7 @@ import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.NavTab
 
 object Constants {
-    const val BASE_URL = "http://127.0.0.1:8080"
+    const val BASE_URL = "http://localhost:8080"
 
     /*          Bottom Navigation Panel         */
 

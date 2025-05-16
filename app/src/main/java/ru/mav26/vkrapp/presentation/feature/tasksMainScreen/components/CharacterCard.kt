@@ -119,6 +119,7 @@ private fun ccprev() {
             maxHp = 50,
             currentHp = 34,
             exp = 40,
+            expToNextLvl = 50,
             coins = 400,
             mood = 16,
             stressCoef = 4,

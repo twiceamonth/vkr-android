@@ -10,21 +10,20 @@ import ru.mav26.vkrapp.domain.model.events.ActiveEvent
 import ru.mav26.vkrapp.domain.repository.EventsRepository
 
 class EventsRepositoryImpl(
-    private val client: HttpClient
+    private val client: HttpClient,
 ) : EventsRepository {
-    override suspend fun getActiveEvent(userLogin: String): ActiveEvent? {
+    override suspend fun getActiveEvent(): ActiveEvent? {
         val response: ActiveEventResponse =
-            client.get("/get-active-event/${userLogin}").body()
+            client.get("/get-active-event").body()
         return response.fromApi()
     }
 
     override suspend fun updateEventProgress(
         activeEventId: String,
-        userLogin: String,
-        type: String
+        type: String,
     ) {
         val response =
-            client.patch("/update-event-progress/${activeEventId}/${userLogin}/${type}")
+            client.patch("/update-event-progress/${activeEventId}/${type}")
     }
 
 }

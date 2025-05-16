@@ -11,19 +11,19 @@ class AchievementsUseCase(
         return achievementsRepository.getAchievementsList()
     }
 
-    suspend fun getAchievementsProgress(userLogin: String) : List<AchievementProgress> {
-        return achievementsRepository.getAchievementsProgress(userLogin)
+    suspend fun getAchievementsProgress() : List<AchievementProgress> {
+        return achievementsRepository.getAchievementsProgress()
     }
 
-    suspend fun startProgress(userLogin: String, achievementId: String) {
-        return achievementsRepository.startAchievementProgress(userLogin, achievementId)
+    suspend fun startProgress(achievementId: String) {
+        return achievementsRepository.startAchievementProgress(achievementId)
     }
 
-    suspend fun updateProgress(progressId: String, userLogin: String) {
-        return achievementsRepository.updateAchievementProgress(progressId, userLogin)
+    suspend fun updateProgress(progressId: String) {
+        return achievementsRepository.updateAchievementProgress(progressId)
     }
 
-    suspend fun resetProgress(progressId: String, userLogin: String) {
-        return achievementsRepository.resetProgress(progressId, userLogin)
+    suspend fun resetProgress(progressId: String) {
+        return achievementsRepository.resetProgress(progressId)
     }
 }

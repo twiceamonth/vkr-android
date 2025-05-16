@@ -17,18 +17,16 @@ class StoreViewModel(
 
     /* TODO: состояние персонажа */
 
-    fun getItems(type: String, userLogin: String) {
-        /* todo: получение логина из переменной окружения */
+    fun getItems(type: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val itemsList =storeUseCase.getItems(type, userLogin)
+            val itemsList =storeUseCase.getItems(type)
             _state.update { it.copy(items = itemsList) }
         }
     }
 
-    fun buyItem(storeId: String, userLogin: String) {
-        /* todo: получение логина из переменной окружения */
+    fun buyItem(storeId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            storeUseCase.buyItem(storeId, userLogin)
+            storeUseCase.buyItem(storeId)
         }
     }
 }

@@ -25,6 +25,7 @@ fun CharacterResponse.fromApi() : Character {
         maxHp = this.maxHp,
         currentHp = this.currentHp,
         exp = this.exp,
+        expToNextLvl = this.expToNextLvl,
         coins = this.coins,
         mood = this.moodLevel,
         stressCoef = this.stressCoef,

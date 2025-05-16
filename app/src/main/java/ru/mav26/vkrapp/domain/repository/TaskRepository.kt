@@ -13,17 +13,17 @@ import ru.mav26.vkrapp.domain.model.task.TaskDetails
 import ru.mav26.vkrapp.domain.model.task.TaskEdit
 
 interface TaskRepository {
-    suspend fun getTasksList(userLogin: String) : List<Task>
+    suspend fun getTasksList() : List<Task>
 
-    suspend  fun getHabitsList(userLogin: String) : List<Habit>
+    suspend  fun getHabitsList() : List<Habit>
 
     suspend fun getHabitDetails(id: String) : HabitDetails
 
     suspend fun getTaskDetails(id: String) : TaskDetails
 
-    suspend fun createTask(task: TaskCreate, userLogin: String)
+    suspend fun createTask(task: TaskCreate)
 
-    suspend fun createHabit(habit: HabitCreate, userLogin: String)
+    suspend fun createHabit(habit: HabitCreate)
 
     suspend fun createSubtask(subtask: String, taskId: String)
 

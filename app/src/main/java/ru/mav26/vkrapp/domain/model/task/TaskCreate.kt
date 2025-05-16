@@ -12,6 +12,5 @@ data class TaskCreate(
     val details: List<Details> = emptyList(),
     val timerInterval: LocalTime? = null,
     val description: String,
-    val subtasks: List<String> = emptyList(),
-    val userLogin: String
+    val subtasks: List<String> = emptyList()
 )

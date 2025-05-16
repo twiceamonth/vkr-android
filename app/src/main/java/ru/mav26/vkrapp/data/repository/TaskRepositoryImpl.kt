@@ -32,15 +32,15 @@ import ru.mav26.vkrapp.domain.repository.TaskRepository
 class TaskRepositoryImpl(
     private val client: HttpClient
 ) : TaskRepository {
-    override suspend fun getTasksList(userLogin: String): List<Task> {
+    override suspend fun getTasksList(): List<Task> {
         val response: List<TasksListResponse> =
-            client.get("/tasks-list/${userLogin}").body()
+            client.get("/tasks-list").body()
         return response.map { it.fromApi() }
     }
 
-    override suspend fun getHabitsList(userLogin: String): List<Habit> {
+    override suspend fun getHabitsList(): List<Habit> {
         val response: List<HabitListResponse> =
-            client.get("/habit-list/${userLogin}").body()
+            client.get("/habit-list").body()
         return response.map { it.fromApi() }
     }
 
@@ -54,15 +54,15 @@ class TaskRepositoryImpl(
         return response.fromApi()
     }
 
-    override suspend fun createTask(task: TaskCreate, userLogin: String) {
-        val response = client.post("/new-task/${userLogin}") {
+    override suspend fun createTask(task: TaskCreate) {
+        val response = client.post("/new-task") {
             contentType(ContentType.Application.Json)
             setBody(task.toApi())
         }
     }
 
-    override suspend fun createHabit(habit: HabitCreate, userLogin: String) {
-        val response = client.post("/new-habit/${userLogin}") {
+    override suspend fun createHabit(habit: HabitCreate) {
+        val response = client.post("/new-habit") {
             contentType(ContentType.Application.Json)
             setBody(habit.toApi())
         }

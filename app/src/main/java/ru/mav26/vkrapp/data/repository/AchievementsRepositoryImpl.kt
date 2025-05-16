@@ -20,22 +20,22 @@ class AchievementsRepositoryImpl(
         return response.map { it.fromApi() }
     }
 
-    override suspend fun getAchievementsProgress(userLogin: String): List<AchievementProgress> {
+    override suspend fun getAchievementsProgress(): List<AchievementProgress> {
         val response: List<AchievementProgressResponse> =
-            client.get("/get-achievements-progress/${userLogin}").body()
+            client.get("/get-achievements-progress").body()
         return response.map { it.fromApi() }
     }
 
-    override suspend fun startAchievementProgress(userLogin: String, achievementId: String) {
-        val response = client.post("/start-achievement-progress/${achievementId}/${userLogin}")
+    override suspend fun startAchievementProgress(achievementId: String) {
+        val response = client.post("/start-achievement-progress/${achievementId}")
     }
 
-    override suspend fun updateAchievementProgress(progressId: String, userLogin: String) {
-        val response = client.post("/update-achievement-progress/${progressId}/${userLogin}")
+    override suspend fun updateAchievementProgress(progressId: String) {
+        val response = client.post("/update-achievement-progress/${progressId}")
     }
 
-    override suspend fun resetProgress(progressId: String, userLogin: String) {
-        val response = client.post("/reset-progress/${progressId}/${userLogin}")
+    override suspend fun resetProgress(progressId: String) {
+        val response = client.post("/reset-progress/${progressId}")
     }
 
 }
