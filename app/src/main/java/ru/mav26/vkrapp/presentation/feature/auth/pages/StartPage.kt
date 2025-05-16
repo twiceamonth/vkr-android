@@ -10,13 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.presentation.feature.auth.components.AuthButton
 
 @Composable
-fun StartPage(modifier: Modifier = Modifier) {
+fun StartPage(
+    onRegister: () -> Unit,
+    onLogin: () -> Unit,
+) {
     Column(
         verticalArrangement = Arrangement.Bottom,
         modifier = Modifier
@@ -32,18 +34,12 @@ fun StartPage(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp)
-        ) { /*TODO*/ }
+        ) { onRegister() }
 
         AuthButton(
             text = stringResource(R.string.login),
             isFilled = false,
             modifier = Modifier.fillMaxWidth()
-        ) { /*TODO*/ }
+        ) { onLogin() }
     }
-}
-
-@Preview
-@Composable
-private fun StartPagePreview() {
-    StartPage()
 }

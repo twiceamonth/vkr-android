@@ -11,6 +11,7 @@ composeBom = "2024.04.01"
 
 navVersion = "2.8.9"
 koinVersion = "4.0.2"
+koinVersion2 = "3.3.3"
 coilVersion = "3.1.0"
 ktorVersion = "3.1.0"
 json = "1.8.0"
@@ -34,6 +35,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 android-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navVersion" }
 koin = { group = "io.insert-koin", name = "koin-android" , version.ref = "koinVersion"}
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose" , version.ref = "koinVersion"}
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coilVersion" }
 coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coilVersion" }
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }

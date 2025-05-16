@@ -29,7 +29,10 @@ import ru.mav26.vkrapp.presentation.components.AuthTextField
 import ru.mav26.vkrapp.presentation.feature.auth.AuthViewModel
 
 @Composable
-fun RegisterPage(authViewModel: AuthViewModel,  modifier: Modifier = Modifier) {
+fun RegisterPage(
+    authViewModel: AuthViewModel,
+    onBack: () -> Unit
+) {
     val context = LocalContext.current
 
     var login by remember { mutableStateOf("") }
@@ -84,7 +87,7 @@ fun RegisterPage(authViewModel: AuthViewModel,  modifier: Modifier = Modifier) {
             authViewModel.register(login, password)
         }
 
-        TextButton(onClick = { /*TODO*/ }) {
+        TextButton(onClick = onBack) {
             Text(
                 text = stringResource(R.string.back),
                 fontSize = 16.sp,
@@ -93,10 +96,4 @@ fun RegisterPage(authViewModel: AuthViewModel,  modifier: Modifier = Modifier) {
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun RPrev() {
-    //RegisterPage()
 }

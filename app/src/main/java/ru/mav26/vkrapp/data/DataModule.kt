@@ -31,7 +31,12 @@ import ru.mav26.vkrapp.domain.repository.TaskRepository
 val dataModule = module {
     single { TokenDataStoreManager(androidContext()) }
     single { AccessTokenInterceptor(get()) }
-    single { TokenRefreshInterceptor(get(), get()) }
+    single {
+        TokenRefreshInterceptor(
+            get(),
+            authApiProvider = { get<AuthRepository>() }
+        )
+    }
 
     single {
         HttpClient(CIO) {

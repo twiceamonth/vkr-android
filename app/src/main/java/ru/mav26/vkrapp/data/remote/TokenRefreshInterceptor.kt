@@ -13,8 +13,10 @@ import ru.mav26.vkrapp.domain.repository.AuthRepository
 
 class TokenRefreshInterceptor(
     private val tokenManager: TokenDataStoreManager,
-    private val authApi: AuthRepository
+    private val authApiProvider: () -> AuthRepository
 ) : HttpClientPlugin<Unit, TokenRefreshInterceptor> {
+
+    private val authApi by lazy { authApiProvider() }
 
     private val mutex = Mutex()
 

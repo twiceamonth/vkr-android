@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
 }
 
@@ -51,6 +52,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.android.navigation)
     implementation(libs.koin)
+    implementation(libs.koin.compose)
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
     implementation(libs.ktor.core)

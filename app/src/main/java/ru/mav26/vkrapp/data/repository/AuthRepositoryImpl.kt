@@ -8,6 +8,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import ru.mav26.vkrapp.data.local.TokenDataStoreManager
 import ru.mav26.vkrapp.data.local.TokenData
+import ru.mav26.vkrapp.data.remote.mappers.toApi
 import ru.mav26.vkrapp.data.remote.models.auth.RefreshTokenRequest
 import ru.mav26.vkrapp.data.remote.models.auth.TokensResponse
 import ru.mav26.vkrapp.domain.model.auth.AuthRequest
@@ -20,7 +21,7 @@ class AuthRepositoryImpl(
     override suspend fun login(authRequest: AuthRequest) {
         val response: TokensResponse = client.post("/login") {
             contentType(ContentType.Application.Json)
-            setBody(authRequest)
+            setBody(authRequest.toApi())
         }.body()
 
         dataStore.saveTokens(response.accessToken, response.refreshToken)
@@ -29,7 +30,7 @@ class AuthRepositoryImpl(
     override suspend fun register(authRequest: AuthRequest) {
         val response: TokensResponse = client.post("/register") {
             contentType(ContentType.Application.Json)
-            setBody(authRequest)
+            setBody(authRequest.toApi())
         }.body()
 
         dataStore.saveTokens(response.accessToken, response.refreshToken)
