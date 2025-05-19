@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.presentation.feature.auth.components.AuthButton
-import ru.mav26.vkrapp.presentation.components.AuthTextField
+import ru.mav26.vkrapp.presentation.components.CustomTextField
 import ru.mav26.vkrapp.presentation.feature.createCharacter.CreateCharacterViewModel
 
 @Composable
@@ -62,7 +62,7 @@ fun NamePage(createCharacterViewModel: CreateCharacterViewModel, modifier: Modif
             modifier = Modifier.padding(bottom = 78.dp)
         )
 
-        AuthTextField(
+        CustomTextField(
             value = characterName,
             onValueChange = {
                 characterName = it

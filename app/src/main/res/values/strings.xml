@@ -9,8 +9,19 @@
     <string name="choose">Выбрать</string>
     <string name="cansel">Отмена</string>
     <string name="start">Начать</string>
+    <string name="save">Сохранить</string>
 
     <string name="toastPassword">Пароли не совпадают!</string>
+    <string name="habitName">Название привычки</string>
+    <string name="taskName">Название задачи</string>
+    <string name="taskLength">Продолжительность выполнения задания</string>
+    <string name="doUntil">Выполнить до</string>
+    <string name="description">Описание</string>
+    <string name="difficulty">Сложность</string>
+    <string name="repeatTask">Повторять задание</string>
+    <string name="taskTimer">Задание с таймером</string>
+    <string name="priority">Приоритет</string>
+    <string name="links">Ссылки</string>
 
     <string name="male">Муж</string>
     <string name="female">Жен</string>
@@ -26,7 +37,15 @@
     <string name="low">🐢</string>
     <string name="medium">⏰</string>
     <string name="high">🔥</string>
-    
+
+    <string name="lowText">Легкая</string>
+    <string name="mediumText">Средняя</string>
+    <string name="highText">Сложная</string>
+
+    <string name="daylyA">Ежедневно</string>
+    <string name="weeklyA">Еженедельно</string>
+    <string name="monthlyA">Ежемесячно</string>
+
     <string name="daily">Каждый день</string>
     <string name="weekly">Каждую неделю</string>
     <string name="monthly">Каждый месяц</string>

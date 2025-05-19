@@ -20,12 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.presentation.feature.auth.components.AuthButton
-import ru.mav26.vkrapp.presentation.components.AuthTextField
+import ru.mav26.vkrapp.presentation.components.CustomTextField
 import ru.mav26.vkrapp.presentation.feature.auth.AuthViewModel
 
 @Composable
@@ -49,7 +48,7 @@ fun RegisterPage(
     ) {
         /*TODO КАРТИНКА*/
 
-        AuthTextField(
+        CustomTextField(
             value = login,
             label = stringResource(R.string.loginLabel),
             onValueChange = { login = it },
@@ -58,7 +57,7 @@ fun RegisterPage(
                 .padding(bottom = 12.dp)
         )
 
-        AuthTextField(
+        CustomTextField(
             value = password,
             label = stringResource(R.string.passwordLabel),
             onValueChange = { password = it },
@@ -67,7 +66,7 @@ fun RegisterPage(
                 .padding(bottom = 12.dp)
         )
 
-        AuthTextField(
+        CustomTextField(
             value = passwordAgain,
             label = stringResource(R.string.passwordAgainLabel),
             onValueChange = { passwordAgain = it },

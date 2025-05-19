@@ -8,10 +8,12 @@ import org.koin.androidx.compose.koinViewModel
 import ru.mav26.vkrapp.presentation.feature.auth.pages.LoginPage
 import ru.mav26.vkrapp.presentation.feature.auth.pages.RegisterPage
 import ru.mav26.vkrapp.presentation.feature.auth.pages.StartPage
+import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages.CreateHabitScreen
+import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages.CreateTaskScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = NavRoutes.INITIAL_SCREEN) {
+    NavHost(navController = navController, startDestination =NavRoutes.CREATE_HABIT /*NavRoutes.INITIAL_SCREEN*/) {
         composable(NavRoutes.INITIAL_SCREEN) {
             StartPage(
                 onRegister = {
@@ -44,6 +46,28 @@ fun AppNavigation(navController: NavHostController) {
                 onBack = {
                     navController.navigate(NavRoutes.INITIAL_SCREEN) {
                         popUpTo(NavRoutes.REGISTER_SCREEN) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable(NavRoutes.CREATE_HABIT) {
+            CreateHabitScreen(
+                taskViewModel = koinViewModel(),
+                onBack = {
+                    navController.navigate(NavRoutes.MAIN_SCREEN) {
+                        popUpTo(NavRoutes.CREATE_HABIT) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable(NavRoutes.CREATE_TASK) {
+            CreateTaskScreen(
+                taskViewModel = koinViewModel(),
+                onBack = {
+                    navController.navigate(NavRoutes.MAIN_SCREEN) {
+                        popUpTo(NavRoutes.CREATE_TASK) { inclusive = true }
                     }
                 }
             )
