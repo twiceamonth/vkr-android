@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.presentation.feature.inventory.pages.InventoryScreen
+import ru.mav26.vkrapp.presentation.feature.store.StoreViewModel
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.NavTab
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.components.BossCard
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.components.BottomNavBar
@@ -50,6 +51,7 @@ fun MainScreen(
     activityViewModel: ActivitiesViewModel,
     characterViewModel: CharacterViewModel,
     taskViewModel: TaskViewModel,
+    storeViewModel: StoreViewModel,
     onAddBtn: (NavTab) -> Unit,
     onLogout: () -> Unit,
 ) {
@@ -147,7 +149,8 @@ fun MainScreen(
                     InventoryScreen(
                         character = characterState.character!!,
                         onBuyHp = {/*TODO*/ },
-                        padding = innerPadding
+                        padding = innerPadding,
+                        storeViewModel = storeViewModel
                     )
                 }
 

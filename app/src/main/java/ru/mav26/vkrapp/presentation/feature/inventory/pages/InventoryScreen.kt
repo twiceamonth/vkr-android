@@ -21,6 +21,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -32,18 +34,22 @@ import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.domain.model.character.Character
 import ru.mav26.vkrapp.presentation.feature.inventory.InventoryUiState
+import ru.mav26.vkrapp.presentation.feature.inventory.InventoryViewModel
 import ru.mav26.vkrapp.presentation.feature.inventory.components.CharacterBigCard
 import ru.mav26.vkrapp.presentation.feature.inventory.components.InventoryItems
+import ru.mav26.vkrapp.presentation.feature.store.StoreViewModel
 import ru.mav26.vkrapp.presentation.theme.buttonColor
 import ru.mav26.vkrapp.presentation.theme.mainColor
 
 @Composable
 fun InventoryScreen(
+    storeViewModel: StoreViewModel,
     onBuyHp: () -> Unit,
     character: Character,
     padding: PaddingValues,
 ) {
     val uiState = remember { mutableStateOf<InventoryUiState>(InventoryUiState.ItemList) }
+    val storeState by storeViewModel.state.collectAsState()
 
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
@@ -105,7 +111,12 @@ fun InventoryScreen(
                 }
 
                 is InventoryUiState.ItemType -> {
-                    Text(state.type)
+                    storeViewModel.getItems(state.type)
+
+                    storeState.items.forEach {
+                        Text(it.title)
+                    }
+
                     OutlinedButton(
                         onClick = { uiState.value = InventoryUiState.ItemList },
                         modifier = Modifier

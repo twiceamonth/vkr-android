@@ -25,6 +25,7 @@ import ru.mav26.vkrapp.presentation.feature.auth.pages.StartPage
 import ru.mav26.vkrapp.presentation.feature.createCharacter.CreateCharacterViewModel
 import ru.mav26.vkrapp.presentation.feature.createCharacter.pages.NamePage
 import ru.mav26.vkrapp.presentation.feature.createCharacter.pages.TypePage
+import ru.mav26.vkrapp.presentation.feature.store.StoreViewModel
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages.CreateHabitScreen
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages.CreateTaskScreen
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages.MainScreen
@@ -41,6 +42,7 @@ fun AppNavigation(
     characterViewModel: CharacterViewModel,
     taskViewModel: TaskViewModel,
     activitiesViewModel: ActivitiesViewModel,
+    storeViewModel: StoreViewModel,
     navController: NavHostController
 ) {
     val state2 by characterViewModel.state.collectAsState()
@@ -217,6 +219,7 @@ fun AppNavigation(
                 onLogout = {
                     tokenManager.clearTokens()
                 },
+                storeViewModel = storeViewModel
             )
         }
 

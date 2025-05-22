@@ -29,7 +29,8 @@ class MainActivity : ComponentActivity() {
                     createCharacterViewModel = koinViewModel(),
                     characterViewModel = koinViewModel(),
                     taskViewModel = koinViewModel(),
-                    activitiesViewModel = koinViewModel()
+                    activitiesViewModel = koinViewModel(),
+                    storeViewModel = koinViewModel(),
                 )
             }
         }
