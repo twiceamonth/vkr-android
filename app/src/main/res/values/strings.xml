@@ -16,6 +16,8 @@
     <string name="taskName">Название задачи</string>
     <string name="taskLength">Продолжительность выполнения задания</string>
     <string name="doUntil">Выполнить до</string>
+    <string name="endTime">Срок выполнения</string>
+    <string name="subtasks">Дополнительные задачи</string>
     <string name="description">Описание</string>
     <string name="difficulty">Сложность</string>
     <string name="repeatTask">Повторять задание</string>
@@ -35,8 +37,11 @@
     <string name="typePageTitle">Выбери класс персонажа</string>
 
     <string name="low">🐢</string>
+    <string name="lowPrio">Низкий</string>
     <string name="medium">⏰</string>
+    <string name="mediumPrio">Средний</string>
     <string name="high">🔥</string>
+    <string name="highPrio">Высокий</string>
 
     <string name="lowText">Легкая</string>
     <string name="mediumText">Средняя</string>

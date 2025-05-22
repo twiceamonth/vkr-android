@@ -1,6 +1,7 @@
 package ru.mav26.vkrapp.domain.model.task
 
 import java.time.LocalTime
+import java.time.OffsetDateTime
 
 data class Habit(
     val habitId: String,
@@ -10,5 +11,5 @@ data class Habit(
     val timerInterval: LocalTime?,
     val description: String,
     val streakCount: Int,
-    val lastPerformed: String
+    val lastPerformed: OffsetDateTime?
 )

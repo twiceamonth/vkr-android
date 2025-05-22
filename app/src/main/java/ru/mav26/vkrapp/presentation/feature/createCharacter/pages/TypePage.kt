@@ -18,6 +18,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,6 +43,7 @@ import ru.mav26.vkrapp.presentation.feature.createCharacter.CreateCharacterViewM
 @Composable
 fun TypePage(
     createCharacterViewModel: CreateCharacterViewModel,
+    onContinue: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val state by createCharacterViewModel.state.collectAsState()
@@ -55,7 +57,7 @@ fun TypePage(
             onContinue = {
                 createCharacterViewModel.changeType(selectedItem!!.characterType)
                 createCharacterViewModel.createCharacter()
-                /* TODO: navigation*/
+                onContinue()
             },
             onDismiss = {
                 showDialog = false

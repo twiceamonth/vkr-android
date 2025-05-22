@@ -8,7 +8,7 @@ import ru.mav26.vkrapp.domain.model.character.CharacterCreate
 import ru.mav26.vkrapp.domain.model.character.CharacterItems
 import ru.mav26.vkrapp.domain.model.character.CharacterStats
 import ru.mav26.vkrapp.domain.model.character.CharacterType
-import java.time.OffsetTime
+import java.time.OffsetDateTime
 
 fun CharacterResponse.fromApi() : Character {
     return Character(
@@ -29,8 +29,8 @@ fun CharacterResponse.fromApi() : Character {
         coins = this.coins,
         mood = this.moodLevel,
         stressCoef = this.stressCoef,
-        createdAt = OffsetTime.parse(this.createdAt),
-        deadAt = OffsetTime.parse(this.deadAt)
+        createdAt = OffsetDateTime.parse(this.createdAt),
+        deadAt = if(this.deadAt != "null") OffsetDateTime.parse(this.deadAt) else null
     )
 }
 

@@ -10,11 +10,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.mav26.vkrapp.domain.model.task.HabitEdit
-import ru.mav26.vkrapp.domain.model.task.SubtaskEdit
-import ru.mav26.vkrapp.domain.model.task.TaskEdit
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.viewmodels.TaskViewModel
 import java.time.Duration
-import java.time.LocalTime
 import java.time.OffsetDateTime
 
 @Composable
@@ -30,7 +27,7 @@ fun HabitList(
             .padding(16.dp)
     ) {
         items(state.habits) { habit ->
-            val isDone = IsDone(OffsetDateTime.parse(habit.lastPerformed))
+            val isDone = if(habit.lastPerformed != null) IsDone(habit.lastPerformed) else false
 
             HabitCard(
                 habit = habit,

@@ -28,7 +28,8 @@ import ru.mav26.vkrapp.presentation.feature.auth.AuthViewModel
 @Composable
 fun LoginPage(
     authViewModel: AuthViewModel,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onAuth: () -> Unit,
 ) {
     var login by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -65,7 +66,10 @@ fun LoginPage(
         AuthButton(
             text = stringResource(R.string.login),
             modifier = Modifier.width(164.dp).padding(bottom = 2.dp)
-        ) { authViewModel.login(login, password) }
+        ) {
+            authViewModel.login(login, password)
+            onAuth()
+        }
 
         TextButton(onClick = onBack) {
             Text(

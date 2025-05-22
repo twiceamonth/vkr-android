@@ -30,7 +30,8 @@ import ru.mav26.vkrapp.presentation.feature.auth.AuthViewModel
 @Composable
 fun RegisterPage(
     authViewModel: AuthViewModel,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onRegister: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -84,6 +85,7 @@ fun RegisterPage(
                 return@AuthButton
             }
             authViewModel.register(login, password)
+            onRegister()
         }
 
         TextButton(onClick = onBack) {

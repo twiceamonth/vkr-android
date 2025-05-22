@@ -201,25 +201,3 @@ fun HabitCard(
         }
     }
 }
-
-
-@Preview
-@Composable
-private fun hcprev() {
-    HabitCard(
-        habit = Habit(
-            habitId = "TODO()",
-            title = "TODO()",
-            difficulty = "hard",
-            frequency = "week",
-            timerInterval = null,
-            description = "TODO()",
-            streakCount = 1,
-            lastPerformed = ""
-        ),
-        onStatusChange = {},
-        onCardClick = {},
-        done = false,
-        onTimerStart = {}
-    )
-}

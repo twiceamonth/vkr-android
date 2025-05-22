@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.domain.model.character.Character
+import java.time.OffsetDateTime
 import java.time.OffsetTime
 
 @Composable
@@ -123,7 +124,7 @@ private fun ccprev() {
             coins = 400,
             mood = 16,
             stressCoef = 4,
-            createdAt = OffsetTime.now(),
+            createdAt = OffsetDateTime.now(),
             deadAt = null
         )
     )

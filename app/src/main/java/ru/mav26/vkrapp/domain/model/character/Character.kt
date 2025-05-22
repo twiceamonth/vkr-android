@@ -1,6 +1,6 @@
 package ru.mav26.vkrapp.domain.model.character
 
-import java.time.OffsetTime
+import java.time.OffsetDateTime
 
 data class Character(
     val characterId: String,
@@ -20,6 +20,6 @@ data class Character(
     val coins: Int,
     val mood: Int,
     val stressCoef: Int,
-    val createdAt: OffsetTime,
-    val deadAt: OffsetTime? = null
+    val createdAt: OffsetDateTime,
+    val deadAt: OffsetDateTime? = null
 )

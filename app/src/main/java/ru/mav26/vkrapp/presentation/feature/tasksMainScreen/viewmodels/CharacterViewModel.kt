@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.mav26.vkrapp.domain.model.character.CharacterItems
 import ru.mav26.vkrapp.domain.model.character.CharacterStats
 import ru.mav26.vkrapp.domain.usecase.CharacterUseCase
@@ -21,18 +22,22 @@ class CharacterViewModel(
     /*todo: update character in state*/
 
     fun getCharacter() {
-        /*todo: userlogin env*/
-        viewModelScope.launch(Dispatchers.IO) {
-            val char = characterUseCase.getCharacter()
-            _state.update { it.copy(character = char) }
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+            val char = withContext(Dispatchers.IO) {
+                characterUseCase.getCharacter()
+            }
+            _state.update { it.copy(character = char, isLoading = false) }
         }
     }
 
     fun getAllCharacters() {
-        /*todo: userlogin env*/
         viewModelScope.launch(Dispatchers.IO) {
-            val charList = characterUseCase.getAllCharacters()
-            _state.update { it.copy(allCharacters = charList) }
+            _state.update { it.copy(isLoading = true) }
+            val charList = withContext(Dispatchers.IO) {
+                characterUseCase.getAllCharacters()
+            }
+            _state.update { it.copy(allCharacters = charList, isLoading = false) }
         }
     }
 

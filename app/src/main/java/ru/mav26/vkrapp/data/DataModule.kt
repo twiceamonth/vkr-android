@@ -29,7 +29,7 @@ import ru.mav26.vkrapp.domain.repository.StoreRepository
 import ru.mav26.vkrapp.domain.repository.TaskRepository
 
 val dataModule = module {
-    single { TokenDataStoreManager(androidContext()) }
+    single { TokenDataStoreManager(get()) }
     single { AccessTokenInterceptor(get()) }
     single {
         TokenRefreshInterceptor(

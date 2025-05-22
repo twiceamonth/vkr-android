@@ -1,5 +1,6 @@
 package ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -123,6 +126,7 @@ fun CreateHabitScreen(
     ) { innerPadding ->
         Column(
             modifier = Modifier
+                .background(color = backgroundColor)
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(16.dp)
@@ -200,23 +204,33 @@ fun CreateHabitScreen(
                 }
             }
 
-            Spacer(Modifier.height(16.dp))
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.taskTimer),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium
+                )
 
-            Text(
-                text = stringResource(R.string.taskTimer),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
-            )
-
-            Spacer(Modifier.height(16.dp))
-
-            CustomTextField(
-                value = habitTimer,
-                label = stringResource(R.string.taskTimer),
-                onValueChange = {habitTimer = it},
-                fieldType = FieldType.Time,
-                modifier = Modifier.fillMaxWidth()
-            )
+                if (habitTimer != null) {
+                    TextButton(
+                        contentPadding = ButtonDefaults.ContentPadding.apply { 0.dp },
+                        onClick = { habitTimer = null }
+                    ) {
+                        Text(
+                            text = stringResource(R.string.cansel),
+                            fontSize = 16.sp,
+                            color = mainColor,
+                            fontWeight = FontWeight.W300
+                        )
+                    }
+                }
+            }
         }
     }
 }

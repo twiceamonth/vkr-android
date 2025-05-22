@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 import ru.mav26.vkrapp.app.navigation.AppNavigation
 import ru.mav26.vkrapp.presentation.theme.VkrappTheme
 
@@ -21,7 +23,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             VkrappTheme {
                 AppNavigation(
-                    navController = rememberNavController()
+                    navController = rememberNavController(),
+                    tokenManager = koinInject(),
+                    authViewModel = koinViewModel(),
+                    createCharacterViewModel = koinViewModel(),
+                    characterViewModel = koinViewModel(),
+                    taskViewModel = koinViewModel(),
+                    activitiesViewModel = koinViewModel()
                 )
             }
         }

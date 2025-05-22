@@ -1,6 +1,7 @@
 package ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,22 +24,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import io.ktor.client.HttpClient
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.app.Constants
-import ru.mav26.vkrapp.data.repository.BossesRepositoryImpl
-import ru.mav26.vkrapp.data.repository.CharacterRepositoryImpl
-import ru.mav26.vkrapp.data.repository.EffectsRepositoryImpl
-import ru.mav26.vkrapp.data.repository.EventsRepositoryImpl
-import ru.mav26.vkrapp.data.repository.TaskRepositoryImpl
-import ru.mav26.vkrapp.domain.usecase.BossesUseCase
-import ru.mav26.vkrapp.domain.usecase.CharacterUseCase
-import ru.mav26.vkrapp.domain.usecase.EffectsUseCase
-import ru.mav26.vkrapp.domain.usecase.EventsUseCase
-import ru.mav26.vkrapp.domain.usecase.TaskUseCase
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.NavTab
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.components.BossCard
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.components.BottomNavBar
@@ -59,10 +49,17 @@ fun MainScreen(
     activityViewModel: ActivitiesViewModel,
     characterViewModel: CharacterViewModel,
     taskViewModel: TaskViewModel,
+    onAddBtn: (NavTab) -> Unit,
+    onLogout: () -> Unit,
 ) {
     val activityState by activityViewModel.state.collectAsState()
     val characterState by characterViewModel.state.collectAsState()
     val taskState by taskViewModel.state.collectAsState()
+
+    LaunchedEffect(Unit) {
+        taskViewModel.getTasks()
+        taskViewModel.getHabits()
+    }
 
     var selected by remember { mutableStateOf<NavTab>(Constants.bottomTabs[0]) }
 
@@ -70,7 +67,8 @@ fun MainScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    val name = if (characterState.character != null) characterState.character!!.characterName else "Имя персонажа"
+                    val name =
+                        if (characterState.character != null) characterState.character!!.characterName else "Имя персонажа"
                     Text(
                         text = name,
                         fontSize = 16.sp,
@@ -85,14 +83,14 @@ fun MainScreen(
                     actionIconContentColor = backgroundColor
                 ),
                 actions = {
-                    IconButton(onClick = {/*TODO*/}) {
+                    IconButton(onClick = {/*TODO: сделать скритие/показ выполненных задач*/ }) {
                         Icon(
                             painter = painterResource(R.drawable.filter),
                             contentDescription = null
                         )
                     }
 
-                    IconButton(onClick = {/*TODO*/}) {
+                    IconButton(onClick = onLogout) {
                         Icon(
                             painter = painterResource(R.drawable.logout),
                             contentDescription = null
@@ -111,14 +109,17 @@ fun MainScreen(
                     bottomTabs = Constants.bottomTabs,
                     selectedTab = selected,
                     onTabSelected = { selected = it },
-                    onCenterClick = {}
+                    onCenterClick = { onAddBtn(it) }
                 )
             }
 
         }
-    ) {
+    ) { innerPadding ->
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .background(color = backgroundColor)
+                .fillMaxSize()
+                .padding(innerPadding)
         ) {
             Column {
                 CharacterCard(character = characterState.character!!)
@@ -146,18 +147,4 @@ fun MainScreen(
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun msprev() {
-    MainScreen(
-        activityViewModel = ActivitiesViewModel(
-            BossesUseCase(BossesRepositoryImpl(HttpClient())),
-            EffectsUseCase(EffectsRepositoryImpl(HttpClient())),
-            EventsUseCase((EventsRepositoryImpl(HttpClient())))
-        ),
-        characterViewModel = CharacterViewModel(CharacterUseCase(CharacterRepositoryImpl(HttpClient()))),
-        taskViewModel = TaskViewModel(TaskUseCase(TaskRepositoryImpl(HttpClient())))
-    )
 }

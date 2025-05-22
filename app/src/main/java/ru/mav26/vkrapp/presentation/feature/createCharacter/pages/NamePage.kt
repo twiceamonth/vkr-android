@@ -36,7 +36,11 @@ import ru.mav26.vkrapp.presentation.components.CustomTextField
 import ru.mav26.vkrapp.presentation.feature.createCharacter.CreateCharacterViewModel
 
 @Composable
-fun NamePage(createCharacterViewModel: CreateCharacterViewModel, modifier: Modifier = Modifier) {
+fun NamePage(
+    createCharacterViewModel: CreateCharacterViewModel,
+    onNextClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val radioOptions = listOf(stringResource(R.string.male), stringResource(R.string.female))
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[0]) }
 
@@ -122,14 +126,9 @@ fun NamePage(createCharacterViewModel: CreateCharacterViewModel, modifier: Modif
         }
 
         AuthButton(
-            text = stringResource(R.string.next)
-        ) { /*TODO*/ }
+            text = stringResource(R.string.next),
+            onClick = onNextClick
+        )
 
     }
-}
-
-@Preview
-@Composable
-private fun NPrev() {
-    //NamePage()
 }

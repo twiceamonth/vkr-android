@@ -24,7 +24,7 @@ fun BottomNavBar(
     bottomTabs: List<NavTab>,
     selectedTab: NavTab,
     onTabSelected: (NavTab) -> Unit,
-    onCenterClick: () -> Unit,
+    onCenterClick: (NavTab) -> Unit,
 ) {
     Box(
         contentAlignment = Alignment.Center,
@@ -86,6 +86,6 @@ fun BottomNavBar(
             }
         }
 
-        AddButton(onCLick = onCenterClick)
+        AddButton(onCLick = { onCenterClick(selectedTab) })
     }
 }
