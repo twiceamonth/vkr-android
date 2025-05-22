@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.app.Constants
+import ru.mav26.vkrapp.presentation.feature.inventory.pages.InventoryScreen
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.NavTab
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.components.BossCard
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.components.BottomNavBar
@@ -116,10 +117,13 @@ fun MainScreen(
                                 selectedMainTab = it
                                 selectedTab = Constants.topTabs[0] // "Задачи"
                             }
+
                             Constants.Tabs.TASKS, Constants.Tabs.HABITS -> {
                                 selectedTab = it
-                                selectedMainTab = Constants.bottomTabs[0] // "Задания" всегда выбрана
+                                selectedMainTab =
+                                    Constants.bottomTabs[0] // "Задания" всегда выбрана
                             }
+
                             else -> {
                                 selectedTab = it
                                 selectedMainTab = it
@@ -138,28 +142,42 @@ fun MainScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            Column {
-                CharacterCard(character = characterState.character!!)
-
-                if (activityState.boss != null) {
-                    Spacer(Modifier.height(12.dp))
-                    BossCard(boss = activityState.boss!!)
+            when {
+                selectedMainTab.id == Constants.Tabs.INVENTORY -> {
+                    InventoryScreen(
+                        character = characterState.character!!,
+                        onBuyHp = {/*TODO*/ },
+                        padding = innerPadding
+                    )
                 }
 
-                if (activityState.event != null) {
-                    Spacer(Modifier.height(12.dp))
-                    EventCard(event = activityState.event!!)
-                }
+                selectedMainTab.id == Constants.Tabs.ASSIGNMENTS -> {
+                    Column {
+                        if (selectedTab == Constants.topTabs[0] || selectedTab == Constants.topTabs[1]) {
+                            CharacterCard(character = characterState.character!!)
+                        }
 
-                if (activityState.effect != null) {
-                    Spacer(Modifier.height(12.dp))
-                    EffectCard(effect = activityState.effect!!)
-                }
+                        if (activityState.boss != null) {
+                            Spacer(Modifier.height(12.dp))
+                            BossCard(boss = activityState.boss!!)
+                        }
 
-                if (selectedTab == Constants.topTabs[0]) {
-                    TaskList(taskViewModel)
-                } else if (selectedTab == Constants.topTabs[1]) {
-                    HabitList(taskViewModel)
+                        if (activityState.event != null) {
+                            Spacer(Modifier.height(12.dp))
+                            EventCard(event = activityState.event!!)
+                        }
+
+                        if (activityState.effect != null) {
+                            Spacer(Modifier.height(12.dp))
+                            EffectCard(effect = activityState.effect!!)
+                        }
+
+                        if (selectedTab == Constants.topTabs[0]) {
+                            TaskList(taskViewModel)
+                        } else if (selectedTab == Constants.topTabs[1]) {
+                            HabitList(taskViewModel)
+                        }
+                    }
                 }
             }
         }

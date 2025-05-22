@@ -45,4 +45,10 @@ object Constants {
     const val FREQUENCY_DAILY = "day"
     const val FREQUENCY_WEEKLY = "week"
     const val FREQUENCY_MONTHLY = "month"
+
+    const val TYPE_HEAD = "head"
+    const val TYPE_BODY = "body"
+    const val TYPE_LEGS = "legs"
+    const val TYPE_FOOTS = "foots"
+    const val TYPE_BCG = "bcg"
 }
