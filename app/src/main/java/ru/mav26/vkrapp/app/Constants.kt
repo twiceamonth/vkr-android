@@ -34,9 +34,9 @@ object Constants {
 
     /*          Tasks and Habits properties          */
 
-    const val DIFFICULTY_EASY = "easy"
+    const val DIFFICULTY_EASY = "low"
     const val DIFFICULTY_MEDIUM = "medium"
-    const val DIFFICULTY_HARD = "hard"
+    const val DIFFICULTY_HARD = "high"
 
     const val PRIORITY_LOW = "low"
     const val PRIORITY_MEDIUM = "medium"

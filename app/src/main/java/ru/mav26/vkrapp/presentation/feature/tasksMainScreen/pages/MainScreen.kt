@@ -61,7 +61,8 @@ fun MainScreen(
         taskViewModel.getHabits()
     }
 
-    var selected by remember { mutableStateOf<NavTab>(Constants.bottomTabs[0]) }
+    var selectedMainTab by remember { mutableStateOf<NavTab>(Constants.bottomTabs[0]) }
+    var selectedTab by remember { mutableStateOf<NavTab>(Constants.topTabs[0]) }
 
     Scaffold(
         topBar = {
@@ -107,8 +108,24 @@ fun MainScreen(
                     topTabs = Constants.topTabs,
                     topTabs2 = Constants.topTabs2,
                     bottomTabs = Constants.bottomTabs,
-                    selectedTab = selected,
-                    onTabSelected = { selected = it },
+                    selectedTab = selectedTab,
+                    selectedBottomTab = selectedMainTab,
+                    onTabSelected = {
+                        when (it.id) {
+                            Constants.Tabs.ASSIGNMENTS -> {
+                                selectedMainTab = it
+                                selectedTab = Constants.topTabs[0] // "Задачи"
+                            }
+                            Constants.Tabs.TASKS, Constants.Tabs.HABITS -> {
+                                selectedTab = it
+                                selectedMainTab = Constants.bottomTabs[0] // "Задания" всегда выбрана
+                            }
+                            else -> {
+                                selectedTab = it
+                                selectedMainTab = it
+                            }
+                        }
+                    },
                     onCenterClick = { onAddBtn(it) }
                 )
             }
@@ -139,9 +156,9 @@ fun MainScreen(
                     EffectCard(effect = activityState.effect!!)
                 }
 
-                if (selected == Constants.topTabs[0]) {
+                if (selectedTab == Constants.topTabs[0]) {
                     TaskList(taskViewModel)
-                } else if (selected == Constants.topTabs[1]) {
+                } else if (selectedTab == Constants.topTabs[1]) {
                     HabitList(taskViewModel)
                 }
             }

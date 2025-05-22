@@ -97,12 +97,12 @@ fun TasksListResponse.fromApi(): Task {
     return Task(
         taskId = this.taskId,
         title = this.title,
-        endTime = if(this.endTime != "null") OffsetDateTime.parse(this.endTime) else null,
+        endTime = if(this.endTime != "null" && this.endTime != null) OffsetDateTime.parse(this.endTime) else null,
         difficulty = this.difficulty,
         priority = this.priority,
         frequency = this.frequency,
         status = this.status,
-        timerInterval = if(this.timerInterval != "null") LocalTime.parse(this.timerInterval) else null,
+        timerInterval = if(this.timerInterval != "null" && this.timerInterval != null) LocalTime.parse(this.timerInterval) else null,
         description = this.description,
         subtasks = this.subtasks.map { it.fromApi() }
     )
@@ -112,16 +112,16 @@ fun TaskDetailsResponse.fromApi(): TaskDetails {
     return TaskDetails(
         taskId = this.taskId,
         title = this.title,
-        endTime = if(this.endTime != "null") OffsetDateTime.parse(this.endTime) else null,
+        endTime = if(this.endTime != "null"&& this.endTime != null) OffsetDateTime.parse(this.endTime) else null,
         difficulty = this.difficulty.fromApi(),
         priority = this.priority.fromApi(),
         frequency = this.frequency.fromApi(),
         details = this.details.map { it.fromApi() },
         status = this.status,
-        timerInterval = if(this.timerInterval != "null") LocalTime.parse(this.timerInterval) else null,
+        timerInterval = if(this.timerInterval != "null" && this.timerInterval != null) LocalTime.parse(this.timerInterval) else null,
         description = this.description,
         createdAt = OffsetDateTime.parse(this.createdAt),
-        finishedAt = if(this.finishedAt != "null") OffsetDateTime.parse(this.finishedAt) else null,
+        finishedAt = if(this.finishedAt != "null" && this.finishedAt != null) OffsetDateTime.parse(this.finishedAt) else null,
         subtasks = this.subtasks.map { it.fromApi() }
     )
 }

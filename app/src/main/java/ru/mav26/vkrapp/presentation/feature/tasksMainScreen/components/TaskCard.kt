@@ -55,7 +55,7 @@ fun TaskCard(
     onSubStatusChange: (Boolean, String) -> Unit,
     onTimerStart: () -> Unit,
     onCardClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -122,20 +122,22 @@ fun TaskCard(
                         .weight(1f)
                         .fillMaxHeight()
                         .padding(
-                            top = 10.dp,
+                            top = 4.dp,
                             start = 8.dp,
                             end = 8.dp,
-                            bottom = 4.dp
+                            bottom = 2.dp
                         )
                 ) {
-                    Column {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .weight(1f)
+                    ) {
                         Text(
                             text = task.title,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Bold
                         )
-
-                        Spacer(Modifier.height(4.dp))
 
                         Text(
                             text = task.description,
@@ -149,36 +151,6 @@ fun TaskCard(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        if (task.frequency != "") {
-                            val title = when (task.frequency) {
-                                Constants.FREQUENCY_DAILY -> stringResource(R.string.daily)
-                                Constants.FREQUENCY_WEEKLY -> stringResource(R.string.weekly)
-                                Constants.FREQUENCY_MONTHLY -> stringResource(R.string.monthly)
-                                else -> ""
-                            }
-
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                            ) {
-                                Icon(
-                                    painter = painterResource(R.drawable.replays),
-                                    contentDescription = null,
-                                    tint = mainColor.copy(alpha = 0.5f),
-                                    modifier = Modifier.size(14.dp)
-                                )
-
-                                Spacer(Modifier.width(4.dp))
-
-                                Text(
-                                    text = title,
-                                    fontSize = 9.sp,
-                                    lineHeight = 14.sp,
-                                    color = mainColor.copy(alpha = 0.5f)
-                                )
-                            }
-                        }
-
                         if (task.endTime != null) {
                             val day =
                                 if (task.endTime.dayOfMonth < 10) "0${task.endTime.dayOfMonth}"
@@ -190,20 +162,21 @@ fun TaskCard(
 
                             val formatedDate = "${day}.${month}"
 
-                            Row {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
                                 Icon(
                                     painter = painterResource(R.drawable.calendar),
                                     contentDescription = null,
                                     tint = mainColor.copy(alpha = 0.5f),
-                                    modifier = Modifier.size(14.dp)
+                                    modifier = Modifier.size(16.dp)
                                 )
 
                                 Spacer(Modifier.width(4.dp))
 
                                 Text(
                                     text = formatedDate,
-                                    fontSize = 9.sp,
-                                    lineHeight = 14.sp,
+                                    fontSize = 12.sp,
                                     color = mainColor.copy(alpha = 0.5f)
                                 )
                             }
@@ -227,37 +200,39 @@ fun TaskCard(
 
                             val timerValue = "${tHour}${tHMin}${tSec}"
 
-                            Row {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
                                 Icon(
                                     painter = painterResource(R.drawable.timer),
                                     contentDescription = null,
                                     tint = mainColor.copy(alpha = 0.5f),
-                                    modifier = Modifier.size(14.dp)
+                                    modifier = Modifier.size(16.dp)
                                 )
 
                                 Spacer(Modifier.width(4.dp))
 
                                 Text(
                                     text = timerValue,
-                                    fontSize = 9.sp,
-                                    lineHeight = 14.sp,
+                                    fontSize = 12.sp,
                                     color = mainColor.copy(alpha = 0.5f)
                                 )
                             }
                         }
                     }
                 }
-
-                IconButton(
-                    onClick = { expanded = !expanded },
-                    modifier = Modifier
-                        .fillMaxHeight()
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.subtask_expand),
-                        contentDescription = null,
-                        modifier = Modifier.rotate(degree)
-                    )
+                if (task.subtasks.isNotEmpty()) {
+                    IconButton(
+                        onClick = { expanded = !expanded },
+                        modifier = Modifier
+                            .fillMaxHeight()
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.subtask_expand),
+                            contentDescription = null,
+                            modifier = Modifier.rotate(degree)
+                        )
+                    }
                 }
             }
 
@@ -277,19 +252,20 @@ fun TaskCard(
                     modifier = Modifier.padding(4.dp)
                 )
             }
-        }}
+        }
+    }
 
-        if (task.subtasks.isNotEmpty() and expanded) {
-            task.subtasks.forEachIndexed { index, subtask ->
-                Box(
-                    modifier = Modifier
-                        .alpha(animateFloatAsState(if (expanded) 1f else 0f).value)
-                        .fillMaxWidth()
-                ) {
-                    val rounded = if (task.subtasks.count() - 1 != index) roundedCorner else 10.dp
-                    val isLast = task.subtasks.count() != index
-                    SubtaskCard(subtask, cardColor, rounded, isLast) { b, i -> onSubStatusChange(b, i) }
-                }
+    if (task.subtasks.isNotEmpty() and expanded) {
+        task.subtasks.forEachIndexed { index, subtask ->
+            Box(
+                modifier = Modifier
+                    .alpha(animateFloatAsState(if (expanded) 1f else 0f).value)
+                    .fillMaxWidth()
+            ) {
+                val rounded = if (task.subtasks.count() - 1 != index) roundedCorner else 10.dp
+                val isLast = task.subtasks.count() != index
+                SubtaskCard(subtask, cardColor, rounded, isLast) { b, i -> onSubStatusChange(b, i) }
+            }
         }
     }
 

@@ -74,7 +74,7 @@ fun HabitCard(
                 checked = done,
                 isTimer = (habit.timerInterval != null),
                 onCheck = { onStatusChange() },
-                onTimerStart = { onTimerStart() }
+                onTimerStart = { if(habit.timerInterval != null) onTimerStart() }
             )
 
             Column(
@@ -83,10 +83,10 @@ fun HabitCard(
                     .weight(1f)
                     .fillMaxHeight()
                     .padding(
-                        top = 10.dp,
+                        top = 4.dp,
                         start = 8.dp,
                         end = 8.dp,
-                        bottom = 4.dp
+                        bottom = 2.dp
                     )
             ) {
                 Column {
@@ -95,8 +95,6 @@ fun HabitCard(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     )
-
-                    Spacer(Modifier.height(4.dp))
 
                     Text(
                         text = habit.description,
@@ -126,7 +124,7 @@ fun HabitCard(
                                 painter = painterResource(R.drawable.replays),
                                 contentDescription = null,
                                 tint = mainColor.copy(alpha = 0.5f),
-                                modifier = Modifier.size(14.dp)
+                                modifier = Modifier.size(16.dp)
                             )
 
                             Spacer(Modifier.width(4.dp))
@@ -160,7 +158,9 @@ fun HabitCard(
 
                         val timerValue = "${tHour}${tHMin}${tSec}"
 
-                        Row {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
                             Icon(
                                 painter = painterResource(R.drawable.timer),
                                 contentDescription = null,
@@ -179,7 +179,9 @@ fun HabitCard(
                         }
                     }
 
-                    Row {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
                         Icon(
                             painter = painterResource(R.drawable.done_times),
                             contentDescription = null,

@@ -115,6 +115,8 @@ fun CreateTaskScreen(
                             else -> ""
                         }
 
+                        subtasksList = subtasksList.filter { it != "" }
+
                         taskViewModel.createTask(
                             TaskCreate(
                                 title = taskTitle,

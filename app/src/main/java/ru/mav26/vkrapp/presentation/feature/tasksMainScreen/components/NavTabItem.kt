@@ -36,6 +36,7 @@ import ru.mav26.vkrapp.presentation.theme.mainColor
 fun NavTabItem(
     tab: NavTab,
     selected: Boolean,
+    selectedBottom: Boolean = false,
     onClick: (NavTab) -> Unit,
     modifier: Modifier = Modifier,
 ) {

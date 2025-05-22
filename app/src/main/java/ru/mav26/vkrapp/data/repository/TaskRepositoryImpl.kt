@@ -99,6 +99,8 @@ class TaskRepositoryImpl(
     override suspend fun editHabit(newHabit: HabitEdit, habitId: String) {
         val response = client.patch("/edit-habit/${habitId}") {
             contentType(ContentType.Application.Json)
+            val body = newHabit.toApi()
+            println(">>> PATCH Body: $body")
             setBody(newHabit.toApi())
         }
     }

@@ -36,14 +36,18 @@ fun CustomAdd(
 ) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = modifier
+        modifier = Modifier
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
             ) {
                 if (isTimer) {
                     onTimerStart()
-                } else onCheck()
+                    // TODO : onCheck should act after onTimer delay
+                    onCheck()
+                } else {
+                    onCheck()
+                }
             }
             .height(70.dp)
             .width(50.dp)

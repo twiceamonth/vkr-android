@@ -23,6 +23,7 @@ fun BottomNavBar(
     topTabs2: List<NavTab>,
     bottomTabs: List<NavTab>,
     selectedTab: NavTab,
+    selectedBottomTab: NavTab,
     onTabSelected: (NavTab) -> Unit,
     onCenterClick: (NavTab) -> Unit,
 ) {
@@ -78,7 +79,8 @@ fun BottomNavBar(
                 bottomTabs.forEach { tab ->
                     NavTabItem(
                         tab = tab,
-                        selected = tab.id == selectedTab.id,
+                        selectedBottom = tab.id == selectedBottomTab.id,
+                        selected = tab.id == selectedBottomTab.id,
                         onClick = { onTabSelected(it) },
                         modifier = Modifier.weight(0.5f)
                     )
