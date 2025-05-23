@@ -13,10 +13,42 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.mav26.vkrapp.domain.model.task.SubtaskEdit
+import ru.mav26.vkrapp.domain.model.task.Task
 import ru.mav26.vkrapp.domain.model.task.TaskEdit
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.viewmodels.TaskViewModel
 import java.time.OffsetDateTime
 
+@Composable
+fun TaskList(
+    taskViewModel: TaskViewModel,
+    task: Task,
+    modifier: Modifier = Modifier,
+) {
+    val state by taskViewModel.state.collectAsState()
+
+    TaskCard(
+        task = task,
+        onStatusChange = {
+            taskViewModel.editTask(
+                TaskEdit(
+                    status = it,
+                    finishedAt = if(it) OffsetDateTime.now() else null
+                ), task.taskId
+            )
+            taskViewModel.getTasks()
+        },
+        onSubStatusChange = { isChecked, subtaskId ->
+            taskViewModel.editSubtask(SubtaskEdit(status = isChecked), subtaskId)
+            taskViewModel.getTasks()
+        },
+        onTimerStart = {
+            /*TODO*/
+        },
+        onCardClick = { /*TODO*/ }
+    )
+}
+
+/*
 @Composable
 fun TaskList(
     taskViewModel: TaskViewModel,
@@ -54,4 +86,4 @@ fun TaskList(
             Spacer(Modifier.height(12.dp))
         }
     }
-}
+}*/

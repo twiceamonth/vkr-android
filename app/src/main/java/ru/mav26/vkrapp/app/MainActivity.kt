@@ -31,7 +31,9 @@ class MainActivity : ComponentActivity() {
                     taskViewModel = koinViewModel(),
                     activitiesViewModel = koinViewModel(),
                     storeViewModel = koinViewModel(),
-                    achievementsViewModel = koinViewModel()
+                    achievementsViewModel = koinViewModel(),
+                    statisticsViewModel = koinViewModel(),
+                    inventoryViewModel = koinViewModel()
                 )
             }
         }

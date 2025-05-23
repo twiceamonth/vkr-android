@@ -30,15 +30,25 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import kotlinx.coroutines.delay
 import ru.mav26.vkrapp.R
+import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.domain.model.effects.ActiveEffect
 import ru.mav26.vkrapp.presentation.theme.effectCard
 import ru.mav26.vkrapp.presentation.theme.mainColor
 import java.time.Duration
 import java.time.OffsetDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @Composable
 fun EffectCard(effect: ActiveEffect) {
     var currentTime by remember { mutableStateOf(OffsetDateTime.now()) }
+
+    val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.getDefault())
+    val localDate = effect.endDate.toInstant()
+        .atZone(ZoneId.systemDefault())
+        .toLocalDate()
+    val formattedDate = localDate.format(formatter)
 
     LaunchedEffect(Unit) {
         while (true) {
@@ -50,7 +60,7 @@ fun EffectCard(effect: ActiveEffect) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp)
+            .height(90.dp)
             .background(
                 color = effectCard,
                 shape = RoundedCornerShape(5.dp)
@@ -59,12 +69,10 @@ fun EffectCard(effect: ActiveEffect) {
     ) {
         Row {
             AsyncImage(
-                model = effect.effectIcon,
+                model = Constants.BASE_URL + effect.effectIcon,
                 contentDescription = null,
                 modifier = Modifier.size(60.dp)
             )
-
-            Spacer(Modifier.width(4.dp))
 
             Column(
                 modifier = Modifier.fillMaxWidth()
@@ -93,12 +101,6 @@ fun EffectCard(effect: ActiveEffect) {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    val duration = Duration.between(currentTime, effect.endDate).abs()
-
-                    val h = duration.toHours()
-                    val m = duration.toMinutes() % 60
-                    val s = duration.seconds % 60
-
                     Icon(
                         painter = painterResource(R.drawable.calendar),
                         tint = mainColor.copy(alpha = 0.5f),
@@ -109,7 +111,7 @@ fun EffectCard(effect: ActiveEffect) {
                     Spacer(Modifier.width(4.dp))
 
                     Text(
-                        text = "Осталось ${h}:${m}:${s}",
+                        text = "Ефект закончится ${formattedDate}",
                         fontSize = 10.sp,
                         color = mainColor.copy(alpha = 0.5f)
                     )
@@ -117,21 +119,4 @@ fun EffectCard(effect: ActiveEffect) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun ecepre() {
-    EffectCard(
-        ActiveEffect(
-            activeEffectId = "TODO()",
-            endDate = OffsetDateTime.now(),
-            isCompleted = false,
-            effectName = "TODO()",
-            description =" TODO()",
-            effectIcon = "TODO()",
-            criteriaType = "TODO()",
-            criteriaValue = 100
-        )
-    )
 }

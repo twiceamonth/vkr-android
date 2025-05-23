@@ -15,8 +15,6 @@ class InventoryViewModel(
     private val _state = MutableStateFlow(InventoryState())
     val state: StateFlow<InventoryState> = _state
 
-    /* TODO: состояние персонажа */
-
     fun heal(characterId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             storeUseCase.heal(characterId)

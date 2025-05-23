@@ -26,6 +26,8 @@ import ru.mav26.vkrapp.presentation.feature.auth.pages.StartPage
 import ru.mav26.vkrapp.presentation.feature.createCharacter.CreateCharacterViewModel
 import ru.mav26.vkrapp.presentation.feature.createCharacter.pages.NamePage
 import ru.mav26.vkrapp.presentation.feature.createCharacter.pages.TypePage
+import ru.mav26.vkrapp.presentation.feature.inventory.InventoryViewModel
+import ru.mav26.vkrapp.presentation.feature.statistics.StatisticsViewModel
 import ru.mav26.vkrapp.presentation.feature.store.StoreViewModel
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages.CreateHabitScreen
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages.CreateTaskScreen
@@ -44,6 +46,8 @@ fun AppNavigation(
     taskViewModel: TaskViewModel,
     achievementsViewModel: AchievementsViewModel,
     activitiesViewModel: ActivitiesViewModel,
+    statisticsViewModel: StatisticsViewModel,
+    inventoryViewModel: InventoryViewModel,
     storeViewModel: StoreViewModel,
     navController: NavHostController
 ) {
@@ -222,7 +226,9 @@ fun AppNavigation(
                     tokenManager.clearTokens()
                 },
                 storeViewModel = storeViewModel,
-                achievementsViewModel = achievementsViewModel
+                achievementsViewModel = achievementsViewModel,
+                statisticsViewModel = statisticsViewModel,
+                inventoryViewModel = inventoryViewModel
             )
         }
 

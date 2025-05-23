@@ -12,7 +12,7 @@ data class ActiveEvent(
     val exp: Int,
     val criteriaType: String,
     val criteriaValue: Int,
-    val endDate: OffsetDateTime,
+    val endDate: Date,
     val isCompleted: Boolean,
     val progress: Int
 )

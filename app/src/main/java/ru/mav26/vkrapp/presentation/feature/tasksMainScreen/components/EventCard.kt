@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.domain.model.events.ActiveEvent
 import ru.mav26.vkrapp.presentation.theme.backgroundColor
 import ru.mav26.vkrapp.presentation.theme.eventCard
@@ -32,7 +33,7 @@ fun EventCard(event: ActiveEvent) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp)
+            .height(90.dp)
             .background(
                 color = eventCard,
                 shape = RoundedCornerShape(5.dp)
@@ -41,7 +42,7 @@ fun EventCard(event: ActiveEvent) {
     ) {
         Row {
             AsyncImage(
-                model = event.eventIcon,
+                model = Constants.BASE_URL + event.eventIcon,
                 contentDescription = null,
                 modifier = Modifier.size(60.dp)
             )
@@ -57,8 +58,6 @@ fun EventCard(event: ActiveEvent) {
                     fontWeight = FontWeight.Medium,
                     fontSize = 16.sp
                 )
-
-                Spacer(Modifier.height(4.dp))
 
                 Text(
                     text = event.description,
@@ -114,24 +113,4 @@ fun EventCard(event: ActiveEvent) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun ecprev() {
-    EventCard(
-        event = ActiveEvent(
-            activeEventId = "TODO()",
-            eventName = "TODO()",
-            description = "TODO()",
-            eventIcon = "TODO()",
-            money = 100,
-            exp = 100,
-            criteriaType = "TODO()",
-            criteriaValue = 10,
-            endDate = OffsetDateTime.now(),
-            isCompleted = false,
-            progress = 4
-        )
-    )
 }

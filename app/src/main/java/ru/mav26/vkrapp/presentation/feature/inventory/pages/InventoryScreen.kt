@@ -18,24 +18,29 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.domain.model.character.Character
+import ru.mav26.vkrapp.domain.model.store.StoreItem
 import ru.mav26.vkrapp.presentation.feature.inventory.InventoryUiState
 import ru.mav26.vkrapp.presentation.feature.inventory.InventoryViewModel
 import ru.mav26.vkrapp.presentation.feature.inventory.components.CharacterBigCard
@@ -54,10 +59,11 @@ fun InventoryScreen(
 ) {
     val uiState = remember { mutableStateOf<InventoryUiState>(InventoryUiState.ItemList) }
     val storeState by storeViewModel.state.collectAsState()
+    var selectedItem by remember { mutableStateOf<StoreItem?>(null) }
 
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize().padding(bottom = 24.dp)
     ) {
         CharacterBigCard(character)
 
@@ -132,9 +138,42 @@ fun InventoryScreen(
                                 StoreItem(
                                     item = item,
                                     itemType = state.type,
-                                    onClick = { /*TODO*/ }
+                                    onClick = {
+                                        selectedItem = it
+                                    }
                                 )
                             }
+                        }
+
+                        selectedItem?.let { item ->
+                            AlertDialog(
+                                onDismissRequest = { selectedItem = null },
+                                title = { Text(text = item.title) },
+                                text = {
+                                    Column {
+                                        Text(text = item.description)
+                                        Spacer(Modifier.height(8.dp))
+                                        Text("Цена: ${item.cost} монет")
+                                        Text("Требуемый уровень: ${item.lvlToBuy}")
+                                    }
+                                },
+                                confirmButton = {
+                                    Button(
+                                        onClick = {
+                                            storeViewModel.buyItem(item.storeId)
+                                            selectedItem = null
+                                        },
+                                        enabled = !item.isOwned
+                                    ) {
+                                        Text(if (item.isOwned) "Куплено" else "Купить")
+                                    }
+                                },
+                                dismissButton = {
+                                    TextButton(onClick = { selectedItem = null }) {
+                                        Text("Отмена")
+                                    }
+                                }
+                            )
                         }
 
                         OutlinedButton(

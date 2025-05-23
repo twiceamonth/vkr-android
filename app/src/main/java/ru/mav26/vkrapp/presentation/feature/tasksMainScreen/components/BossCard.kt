@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import ru.mav26.vkrapp.R
+import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.domain.model.bosses.ActiveBoss
 import ru.mav26.vkrapp.presentation.theme.backgroundColor
 import ru.mav26.vkrapp.presentation.theme.bossCard
@@ -38,7 +39,7 @@ fun BossCard(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp)
+            .height(90.dp)
             .background(
                 color = bossCard,
                 shape = RoundedCornerShape(5.dp)
@@ -47,7 +48,7 @@ fun BossCard(
     ) {
         Row {
             AsyncImage(
-                model = boss.imagePath,
+                model = Constants.BASE_URL + boss.imagePath,
                 contentDescription = null,
                 modifier = Modifier.size(60.dp)
             )
@@ -63,8 +64,6 @@ fun BossCard(
                     fontWeight = FontWeight.Medium,
                     fontSize = 16.sp
                 )
-
-                Spacer(Modifier.height(4.dp))
 
                 Text(
                     text = "${boss.resistType} | ${boss.criteriaType}",
@@ -83,7 +82,7 @@ fun BossCard(
                         painter = painterResource(R.drawable.health),
                         tint = backgroundColor,
                         contentDescription = null,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(24.dp)
                     )
 
                     Spacer(Modifier.width(2.dp))

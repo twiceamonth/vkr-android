@@ -15,8 +15,6 @@ class StoreViewModel(
     private val _state = MutableStateFlow(StoreState())
     val state: StateFlow<StoreState> = _state
 
-    /* TODO: состояние персонажа */
-
     fun getItems(type: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val itemsList =storeUseCase.getItems(type)

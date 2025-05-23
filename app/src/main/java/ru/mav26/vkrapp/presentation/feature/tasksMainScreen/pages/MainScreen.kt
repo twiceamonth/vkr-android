@@ -2,12 +2,14 @@ package ru.mav26.vkrapp.presentation.feature.tasksMainScreen.pages
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -28,9 +30,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.app.Constants
+import ru.mav26.vkrapp.domain.model.task.Habit
+import ru.mav26.vkrapp.domain.model.task.Task
 import ru.mav26.vkrapp.presentation.feature.achievements.AchievementsViewModel
 import ru.mav26.vkrapp.presentation.feature.achievements.pages.AchievementsScreen
+import ru.mav26.vkrapp.presentation.feature.inventory.InventoryViewModel
 import ru.mav26.vkrapp.presentation.feature.inventory.pages.InventoryScreen
+import ru.mav26.vkrapp.presentation.feature.statistics.StatisticsViewModel
+import ru.mav26.vkrapp.presentation.feature.statistics.pages.StatisticsScreen
 import ru.mav26.vkrapp.presentation.feature.store.StoreViewModel
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.NavTab
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.components.BossCard
@@ -55,6 +62,8 @@ fun MainScreen(
     taskViewModel: TaskViewModel,
     achievementsViewModel: AchievementsViewModel,
     storeViewModel: StoreViewModel,
+    inventoryViewModel: InventoryViewModel,
+    statisticsViewModel: StatisticsViewModel,
     onAddBtn: (NavTab) -> Unit,
     onLogout: () -> Unit,
 ) {
@@ -65,6 +74,9 @@ fun MainScreen(
     LaunchedEffect(Unit) {
         taskViewModel.getTasks()
         taskViewModel.getHabits()
+        activityViewModel.getActiveBoss()
+        activityViewModel.getActiveEffect()
+        activityViewModel.getActiveEvent()
     }
 
     var selectedMainTab by remember { mutableStateOf<NavTab>(Constants.bottomTabs[0]) }
@@ -145,13 +157,16 @@ fun MainScreen(
             modifier = Modifier
                 .background(color = backgroundColor)
                 .fillMaxSize()
-                .padding(innerPadding)
+                .padding(
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = (innerPadding.calculateBottomPadding() - 24.dp)
+                )
         ) {
             when {
                 selectedMainTab.id == Constants.Tabs.INVENTORY -> {
                     InventoryScreen(
                         character = characterState.character!!,
-                        onBuyHp = {/*TODO*/ },
+                        onBuyHp = { inventoryViewModel.heal(characterState.character!!.characterId) },
                         padding = innerPadding,
                         storeViewModel = storeViewModel
                     )
@@ -162,26 +177,40 @@ fun MainScreen(
                         if (selectedTab == Constants.topTabs[0] || selectedTab == Constants.topTabs[1]) {
                             CharacterCard(character = characterState.character!!)
                         }
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = 16.dp),
+                            contentPadding = PaddingValues(vertical = 12.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            activityState.boss?.let {
+                                item {
+                                    BossCard(boss = it)
+                                }
+                            }
 
-                        if (activityState.boss != null) {
-                            Spacer(Modifier.height(12.dp))
-                            BossCard(boss = activityState.boss!!)
-                        }
+                            activityState.event?.let {
+                                item {
+                                    EventCard(event = it)
+                                }
+                            }
 
-                        if (activityState.event != null) {
-                            Spacer(Modifier.height(12.dp))
-                            EventCard(event = activityState.event!!)
-                        }
+                            activityState.effect?.let {
+                                item {
+                                    EffectCard(effect = it)
+                                }
+                            }
 
-                        if (activityState.effect != null) {
-                            Spacer(Modifier.height(12.dp))
-                            EffectCard(effect = activityState.effect!!)
-                        }
-
-                        if (selectedTab == Constants.topTabs[0]) {
-                            TaskList(taskViewModel)
-                        } else if (selectedTab == Constants.topTabs[1]) {
-                            HabitList(taskViewModel)
+                            if (selectedTab == Constants.topTabs[0]) {
+                                items(taskState.tasks) { task ->
+                                    TaskList(taskViewModel = taskViewModel, task = task)
+                                }
+                            } else if (selectedTab == Constants.topTabs[1]) {
+                                items(taskState.habits) { habit ->
+                                    HabitList(taskViewModel = taskViewModel, habit = habit)
+                                }
+                            }
                         }
                     }
                 }
@@ -192,7 +221,13 @@ fun MainScreen(
                     )
                 }
 
-                selectedMainTab.id == Constants.Tabs.STATISTICS -> {}
+                selectedMainTab.id == Constants.Tabs.STATISTICS -> {
+                    characterViewModel.getAllCharacters()
+                    StatisticsScreen(
+                        statsViewModel = statisticsViewModel,
+                        characterViewModel = characterViewModel
+                    )
+                }
             }
         }
     }

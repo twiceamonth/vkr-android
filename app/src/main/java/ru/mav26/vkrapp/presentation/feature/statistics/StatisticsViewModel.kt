@@ -3,6 +3,7 @@ package ru.mav26.vkrapp.presentation.feature.statistics
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -31,7 +32,7 @@ class StatisticsViewModel(
     fun dailyCounts() {
         viewModelScope.launch(Dispatchers.IO) {
             val response = statisticsUseCase.dailyCounts()
-            _state.update { it.copy(dailyStats = response) }
+            _state.update { it.copy(dailyStats = response.counts) }
         }
     }
 }
