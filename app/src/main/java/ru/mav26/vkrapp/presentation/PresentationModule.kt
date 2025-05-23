@@ -2,6 +2,7 @@ package ru.mav26.vkrapp.presentation
 
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
+import ru.mav26.vkrapp.presentation.feature.achievements.AchievementsViewModel
 import ru.mav26.vkrapp.presentation.feature.auth.AuthViewModel
 import ru.mav26.vkrapp.presentation.feature.createCharacter.CreateCharacterViewModel
 import ru.mav26.vkrapp.presentation.feature.inventory.InventoryViewModel
@@ -16,6 +17,7 @@ val presentationModule = module {
     viewModel { InventoryViewModel(get()) }
     viewModel { CreateCharacterViewModel(get()) }
     viewModel { CharacterViewModel(get()) }
+    viewModel { AchievementsViewModel(get()) }
     viewModel { ActivitiesViewModel(get(), get(), get()) }
     viewModel { TaskViewModel(get()) }
 }

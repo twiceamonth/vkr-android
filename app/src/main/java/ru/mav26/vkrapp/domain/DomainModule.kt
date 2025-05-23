@@ -7,6 +7,7 @@ import ru.mav26.vkrapp.domain.usecase.BossesUseCase
 import ru.mav26.vkrapp.domain.usecase.CharacterUseCase
 import ru.mav26.vkrapp.domain.usecase.EffectsUseCase
 import ru.mav26.vkrapp.domain.usecase.EventsUseCase
+import ru.mav26.vkrapp.domain.usecase.StatisticsUseCase
 import ru.mav26.vkrapp.domain.usecase.StoreUseCase
 import ru.mav26.vkrapp.domain.usecase.TaskUseCase
 
@@ -19,4 +20,5 @@ val domainModule = module {
     factory { BossesUseCase(get()) }
     factory { AuthUseCase(get()) }
     factory { AchievementsUseCase(get()) }
+    factory { StatisticsUseCase(get()) }
 }

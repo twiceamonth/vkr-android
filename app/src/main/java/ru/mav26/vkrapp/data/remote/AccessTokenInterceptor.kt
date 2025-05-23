@@ -24,7 +24,6 @@ class AccessTokenInterceptor(
     ) {
         scope.plugin(HttpSend).intercept { request ->
             val token = runBlocking { plugin.tokenManager.accessTokenFlow.first() }
-            println("Access token: $token")
             if (!token.isNullOrBlank()) {
                 request.headers[HttpHeaders.Authorization] = "Bearer $token"
             }

@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.mav26.vkrapp.R
 import ru.mav26.vkrapp.app.Constants
+import ru.mav26.vkrapp.presentation.feature.achievements.AchievementsViewModel
+import ru.mav26.vkrapp.presentation.feature.achievements.pages.AchievementsScreen
 import ru.mav26.vkrapp.presentation.feature.inventory.pages.InventoryScreen
 import ru.mav26.vkrapp.presentation.feature.store.StoreViewModel
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.NavTab
@@ -51,6 +53,7 @@ fun MainScreen(
     activityViewModel: ActivitiesViewModel,
     characterViewModel: CharacterViewModel,
     taskViewModel: TaskViewModel,
+    achievementsViewModel: AchievementsViewModel,
     storeViewModel: StoreViewModel,
     onAddBtn: (NavTab) -> Unit,
     onLogout: () -> Unit,
@@ -182,6 +185,14 @@ fun MainScreen(
                         }
                     }
                 }
+
+                selectedMainTab.id == Constants.Tabs.ACHIEVEMENTS -> {
+                    AchievementsScreen(
+                        achievementsViewModel = achievementsViewModel
+                    )
+                }
+
+                selectedMainTab.id == Constants.Tabs.STATISTICS -> {}
             }
         }
     }

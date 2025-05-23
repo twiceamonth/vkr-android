@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.data.local.TokenDataStoreManager
+import ru.mav26.vkrapp.presentation.feature.achievements.AchievementsViewModel
 import ru.mav26.vkrapp.presentation.feature.auth.AuthViewModel
 import ru.mav26.vkrapp.presentation.feature.auth.pages.LoginPage
 import ru.mav26.vkrapp.presentation.feature.auth.pages.RegisterPage
@@ -41,6 +42,7 @@ fun AppNavigation(
     createCharacterViewModel: CreateCharacterViewModel,
     characterViewModel: CharacterViewModel,
     taskViewModel: TaskViewModel,
+    achievementsViewModel: AchievementsViewModel,
     activitiesViewModel: ActivitiesViewModel,
     storeViewModel: StoreViewModel,
     navController: NavHostController
@@ -219,7 +221,8 @@ fun AppNavigation(
                 onLogout = {
                     tokenManager.clearTokens()
                 },
-                storeViewModel = storeViewModel
+                storeViewModel = storeViewModel,
+                achievementsViewModel = achievementsViewModel
             )
         }
 
