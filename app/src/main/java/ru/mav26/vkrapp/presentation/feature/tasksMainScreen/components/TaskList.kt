@@ -11,6 +11,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import ru.mav26.vkrapp.domain.model.task.SubtaskEdit
 import ru.mav26.vkrapp.domain.model.task.Task
@@ -25,6 +26,7 @@ fun TaskList(
     modifier: Modifier = Modifier,
 ) {
     val state by taskViewModel.state.collectAsState()
+    val context = LocalContext.current
 
     TaskCard(
         task = task,
@@ -42,7 +44,7 @@ fun TaskList(
             taskViewModel.getTasks()
         },
         onTimerStart = {
-            /*TODO*/
+            task.timerInterval?.let { taskViewModel.startTimer(context, it, true, itemId = task.taskId) }
         },
         onCardClick = { /*TODO*/ }
     )

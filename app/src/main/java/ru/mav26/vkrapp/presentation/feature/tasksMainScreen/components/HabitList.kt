@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import ru.mav26.vkrapp.domain.model.task.Habit
 import ru.mav26.vkrapp.domain.model.task.HabitEdit
@@ -26,6 +27,7 @@ fun HabitList(
     modifier: Modifier = Modifier,
 ) {
     val state by taskViewModel.state.collectAsState()
+    val context = LocalContext.current
 
     val isDone = habit.lastPerformed?.let { IsDone(it) } ?: false
 
@@ -41,7 +43,12 @@ fun HabitList(
             )
             taskViewModel.getHabits()
         },
-        onTimerStart = { /*TODO*/ },
+        onTimerStart = {
+            habit.timerInterval?.let { taskViewModel.startTimer(
+                context, it, false,
+                itemId = habit.habitId
+            ) }
+        },
         onCardClick = { /*TODO*/ }
     )
 

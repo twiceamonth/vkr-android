@@ -341,9 +341,3 @@ fun CreateTaskScreen(
         }
     }
 }
-
-@Preview
-@Composable
-private fun prevper() {
-    CreateTaskScreen(TaskViewModel(TaskUseCase((TaskRepositoryImpl(HttpClient()))))) { }
-}

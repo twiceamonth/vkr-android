@@ -1,5 +1,8 @@
 package ru.mav26.vkrapp.presentation.feature.tasksMainScreen.viewmodels
 
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -7,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ru.mav26.vkrapp.app.TimerService
 import ru.mav26.vkrapp.domain.model.task.DetailsCreate
 import ru.mav26.vkrapp.domain.model.task.DetailsEdit
 import ru.mav26.vkrapp.domain.model.task.HabitCreate
@@ -16,6 +20,8 @@ import ru.mav26.vkrapp.domain.model.task.TaskCreate
 import ru.mav26.vkrapp.domain.model.task.TaskEdit
 import ru.mav26.vkrapp.domain.usecase.TaskUseCase
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.states.TasksState
+import java.time.LocalTime
+import java.time.OffsetDateTime
 
 class TaskViewModel(
     private val taskUseCase: TaskUseCase
@@ -23,7 +29,33 @@ class TaskViewModel(
     private val _state = MutableStateFlow(TasksState())
     val state: StateFlow<TasksState> = _state
 
-    /*TODO: ADD TIMER STARTER*/
+    fun startTimer(context: Context, timerTime: LocalTime, isTask: Boolean, itemId: String) {
+        val intent = Intent(context, TimerService::class.java).apply {
+            putExtra("target_time", timerTime.toString())
+            putExtra("is_task", isTask)
+            putExtra("item_id", itemId)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(intent)
+        } else {
+            context.startService(intent)
+        }
+    }
+
+    fun finishHabitFromTimer(habitId: String) {
+        val habit = state.value.habits.filter { it.habitId == habitId }.first()
+        val newStreak = habit.streakCount + 1
+        val now = OffsetDateTime.now()
+
+        editHabit(
+            newHabit = HabitEdit(
+                streakCount = newStreak,
+                lastPerformedAt = now
+            ),
+            habitId = habitId
+        )
+    }
 
     fun getTasks() {
         viewModelScope.launch(Dispatchers.IO) {
