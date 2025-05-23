@@ -6,6 +6,7 @@ import ru.mav26.vkrapp.presentation.feature.achievements.AchievementsViewModel
 import ru.mav26.vkrapp.presentation.feature.auth.AuthViewModel
 import ru.mav26.vkrapp.presentation.feature.createCharacter.CreateCharacterViewModel
 import ru.mav26.vkrapp.presentation.feature.inventory.InventoryViewModel
+import ru.mav26.vkrapp.presentation.feature.statistics.StatisticsViewModel
 import ru.mav26.vkrapp.presentation.feature.store.StoreViewModel
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.viewmodels.ActivitiesViewModel
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.viewmodels.CharacterViewModel
@@ -20,4 +21,5 @@ val presentationModule = module {
     viewModel { AchievementsViewModel(get()) }
     viewModel { ActivitiesViewModel(get(), get(), get()) }
     viewModel { TaskViewModel(get()) }
+    viewModel { StatisticsViewModel(get()) }
 }
