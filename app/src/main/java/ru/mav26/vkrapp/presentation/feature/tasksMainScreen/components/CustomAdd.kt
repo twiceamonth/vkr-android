@@ -43,8 +43,6 @@ fun CustomAdd(
             ) {
                 if (isTimer) {
                     onTimerStart()
-                    // TODO : onCheck should act after onTimer delay
-                    onCheck()
                 } else {
                     onCheck()
                 }
