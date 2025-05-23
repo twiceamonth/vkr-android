@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.mav26.vkrapp.R
+import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.domain.model.character.Character
 import java.time.OffsetDateTime
 import java.time.OffsetTime
@@ -36,12 +37,12 @@ fun CharacterCard(character: Character) {
             modifier = Modifier.fillMaxWidth()
         ) {
             CharacterPreview(
-                background = character.background,
-                body = character.characterType,
-                head = character.hair,
-                legs = character.legs,
-                shoes = character.foots,
-                chest = character.chestplate
+                background = Constants.BASE_URL + character.background,
+                body = Constants.BASE_URL + character.characterType,
+                head = Constants.BASE_URL + character.hair,
+                legs = Constants.BASE_URL + character.legs,
+                shoes = Constants.BASE_URL + character.foots,
+                chest = Constants.BASE_URL + character.chestplate
             )
 
             Column(

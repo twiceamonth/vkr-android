@@ -28,21 +28,21 @@ fun InventoryItems(
             modifier = Modifier.fillMaxWidth()
         ) {
             ItemCard(
-                itemImage = character.hair,
+                itemImage = Constants.BASE_URL +  character.hair,
                 itemTitle = "Голова",
                 itemType = Constants.TYPE_HEAD,
                 onClick = { onItemClick(Constants.TYPE_HEAD) }
             )
 
             ItemCard(
-                itemImage = character.chestplate,
+                itemImage = Constants.BASE_URL + character.chestplate,
                 itemTitle = "Торс",
                 itemType = Constants.TYPE_BODY,
                 onClick = { onItemClick(Constants.TYPE_BODY) }
             )
 
             ItemCard(
-                itemImage = character.legs,
+                itemImage = Constants.BASE_URL + character.legs,
                 itemTitle = "Ноги",
                 itemType = Constants.TYPE_LEGS,
                 onClick = { onItemClick(Constants.TYPE_LEGS) }
@@ -56,7 +56,7 @@ fun InventoryItems(
             modifier = Modifier.fillMaxWidth()
         ) {
             ItemCard(
-                itemImage = character.foots,
+                itemImage = Constants.BASE_URL + character.foots,
                 itemTitle = "Обувь",
                 itemType = Constants.TYPE_FOOTS,
                 onClick = { onItemClick(Constants.TYPE_FOOTS) }
@@ -65,7 +65,7 @@ fun InventoryItems(
             Spacer(Modifier.width(44.dp))
 
             ItemCard(
-                itemImage = character.background,
+                itemImage = Constants.BASE_URL + character.background,
                 itemTitle = "Фон",
                 itemType = Constants.TYPE_BCG,
                 onClick = { onItemClick(Constants.TYPE_BCG) }

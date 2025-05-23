@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -37,6 +40,7 @@ import ru.mav26.vkrapp.presentation.feature.inventory.InventoryUiState
 import ru.mav26.vkrapp.presentation.feature.inventory.InventoryViewModel
 import ru.mav26.vkrapp.presentation.feature.inventory.components.CharacterBigCard
 import ru.mav26.vkrapp.presentation.feature.inventory.components.InventoryItems
+import ru.mav26.vkrapp.presentation.feature.inventory.components.StoreItem
 import ru.mav26.vkrapp.presentation.feature.store.StoreViewModel
 import ru.mav26.vkrapp.presentation.theme.buttonColor
 import ru.mav26.vkrapp.presentation.theme.mainColor
@@ -112,18 +116,35 @@ fun InventoryScreen(
 
                 is InventoryUiState.ItemType -> {
                     storeViewModel.getItems(state.type)
-
-                    storeState.items.forEach {
-                        Text(it.title)
-                    }
-
-                    OutlinedButton(
-                        onClick = { uiState.value = InventoryUiState.ItemList },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp)
+                    Column(
+                        modifier = Modifier.fillMaxSize()
                     ) {
-                        Text("Назад")
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(3),
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxSize(), // важно, чтобы грид мог занимать всю доступную высоту
+                            contentPadding = PaddingValues(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            items(storeState.items) { item ->
+                                StoreItem(
+                                    item = item,
+                                    itemType = state.type,
+                                    onClick = { /*TODO*/ }
+                                )
+                            }
+                        }
+
+                        OutlinedButton(
+                            onClick = { uiState.value = InventoryUiState.ItemList },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(50.dp)
+                        ) {
+                            Text("Назад")
+                        }
                     }
                 }
             }

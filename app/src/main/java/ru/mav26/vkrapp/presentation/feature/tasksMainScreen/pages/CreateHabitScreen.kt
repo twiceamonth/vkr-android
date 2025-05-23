@@ -231,6 +231,14 @@ fun CreateHabitScreen(
                     }
                 }
             }
+
+            CustomTextField(
+                value = habitTimer,
+                onValueChange = { habitTimer = it },
+                label = stringResource(R.string.taskTimer),
+                fieldType = FieldType.Time,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }

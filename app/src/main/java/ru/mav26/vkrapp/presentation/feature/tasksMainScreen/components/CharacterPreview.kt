@@ -24,7 +24,7 @@ fun CharacterPreview(
     chest: String,
     modifier: Modifier = Modifier
 ) {
-    val elementSize = with(LocalDensity.current) { 128.toDp() }
+    val elementSize = with(LocalDensity.current) { 256.toDp() }
 
     Box(
         contentAlignment = Alignment.Center,
@@ -50,41 +50,41 @@ fun CharacterPreview(
             AsyncImage(
                 model = body,
                 contentDescription = "Тело",
-                contentScale = ContentScale.None,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier.size(elementSize)
             )
 
             // Ноги
-            AsyncImage(
+            /*AsyncImage(
                 model = legs,
                 contentDescription = "Ноги",
-                contentScale = ContentScale.None,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier.size(elementSize)
-            )
+            )*/
 
             // Одежда
-            AsyncImage(
+            /*AsyncImage(
                 model = chest,
                 contentDescription = "Одежда",
-                contentScale = ContentScale.None,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier.size(elementSize)
-            )
+            )*/
 
             // Голова
-            AsyncImage(
+            /*AsyncImage(
                 model = head,
                 contentDescription = "Голова",
-                contentScale = ContentScale.None,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier.size(elementSize)
-            )
+            )*/
 
             // Обувь
-            AsyncImage(
+            /*AsyncImage(
                 model = shoes,
                 contentDescription = "Обувь",
-                contentScale = ContentScale.None,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier.size(elementSize)
-            )
+            )*/
         }
     }
 }

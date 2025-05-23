@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import ru.mav26.vkrapp.R
+import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.domain.model.character.Character
 import ru.mav26.vkrapp.presentation.feature.tasksMainScreen.components.CharacterStatBar
 import ru.mav26.vkrapp.presentation.theme.buttonColor
@@ -35,7 +36,7 @@ fun CharacterBigCard(
     character: Character,
     modifier: Modifier = Modifier,
 ) {
-    val elementSize = with(LocalDensity.current) { 256.toDp() }
+    val elementSize = with(LocalDensity.current) { 512.toDp() }
 
     Column(
         modifier = Modifier
@@ -48,11 +49,12 @@ fun CharacterBigCard(
                 .height(248.dp)
         ) {
             AsyncImage(
-                model = character.background,
+                model = Constants.BASE_URL + character.background,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
+            println(">>> TYPE    " + character.characterType)
 
             Box(
                 modifier = Modifier
@@ -61,43 +63,43 @@ fun CharacterBigCard(
             ) {
                 // Тело персонажа (базовый слой)
                 AsyncImage(
-                    model = character.characterType,
+                    model = Constants.BASE_URL + character.characterType,
                     contentDescription = "Тело",
-                    contentScale = ContentScale.None,
+                    contentScale = ContentScale.Fit,
                     modifier = Modifier.size(elementSize)
                 )
 
                 // Ноги
-                AsyncImage(
-                    model = character.legs,
+                /*AsyncImage(
+                    model = Constants.BASE_URL + character.legs,
                     contentDescription = "Ноги",
-                    contentScale = ContentScale.None,
+                    contentScale = ContentScale.Fit,
                     modifier = Modifier.size(elementSize)
-                )
+                )*/
 
                 // Одежда
-                AsyncImage(
-                    model = character.chestplate,
+                /*AsyncImage(
+                    model = Constants.BASE_URL + character.chestplate,
                     contentDescription = "Одежда",
-                    contentScale = ContentScale.None,
+                    contentScale = ContentScale.Fit,
                     modifier = Modifier.size(elementSize)
-                )
+                )*/
 
                 // Голова
-                AsyncImage(
-                    model = character.hair,
+                /*AsyncImage(
+                    model = Constants.BASE_URL + character.hair,
                     contentDescription = "Голова",
-                    contentScale = ContentScale.None,
+                    contentScale = ContentScale.Fit,
                     modifier = Modifier.size(elementSize)
-                )
+                )*/
 
                 // Обувь
-                AsyncImage(
-                    model = character.foots,
+                /*AsyncImage(
+                    model = Constants.BASE_URL + character.foots,
                     contentDescription = "Обувь",
-                    contentScale = ContentScale.None,
+                    contentScale = ContentScale.Fit,
                     modifier = Modifier.size(elementSize)
-                )
+                )*/
             }
         }
 
