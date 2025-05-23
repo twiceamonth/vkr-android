@@ -19,8 +19,6 @@ class CharacterViewModel(
     private val _state = MutableStateFlow(CharacterState())
     val state: StateFlow<CharacterState> = _state
 
-    /*todo: update character in state*/
-
     fun getCharacter() {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }

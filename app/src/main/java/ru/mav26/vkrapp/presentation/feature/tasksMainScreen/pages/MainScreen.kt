@@ -71,6 +71,8 @@ fun MainScreen(
     val characterState by characterViewModel.state.collectAsState()
     val taskState by taskViewModel.state.collectAsState()
 
+    var showCompleted by remember { mutableStateOf(true) }
+
     LaunchedEffect(Unit) {
         taskViewModel.getTasks()
         taskViewModel.getHabits()
@@ -102,7 +104,7 @@ fun MainScreen(
                     actionIconContentColor = backgroundColor
                 ),
                 actions = {
-                    IconButton(onClick = {/*TODO: сделать скритие/показ выполненных задач*/ }) {
+                    IconButton(onClick = { showCompleted = !showCompleted }) {
                         Icon(
                             painter = painterResource(R.drawable.filter),
                             contentDescription = null
@@ -203,7 +205,12 @@ fun MainScreen(
                             }
 
                             if (selectedTab == Constants.topTabs[0]) {
-                                items(taskState.tasks) { task ->
+                                val taskList = if(showCompleted) {
+                                    taskState.tasks
+                                } else {
+                                    taskState.tasks.filter { !it.status }
+                                }
+                                items(taskList) { task ->
                                     TaskList(taskViewModel = taskViewModel, task = task)
                                 }
                             } else if (selectedTab == Constants.topTabs[1]) {
