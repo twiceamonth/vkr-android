@@ -27,6 +27,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import coil3.compose.AsyncImage
 import ru.mav26.vkrapp.R
+import ru.mav26.vkrapp.app.Constants
 import ru.mav26.vkrapp.domain.model.character.CharacterType
 import ru.mav26.vkrapp.presentation.feature.createCharacter.CreateCharacterViewModel
 
@@ -50,6 +53,8 @@ fun TypePage(
 
     var showDialog by remember { mutableStateOf(false) }
     var selectedItem by remember { mutableStateOf<CharacterType?>(null) }
+
+    val elementSize = with(LocalDensity.current) { 90.toDp() }
 
     if (showDialog && selectedItem != null) {
         openDialog(
@@ -86,34 +91,38 @@ fun TypePage(
 
         Row {
             Box(
-                Modifier
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
                     .size(100.dp)
-                    .background(color = Color.Cyan, shape = RoundedCornerShape(5.dp))
                     .clickable {
                         selectedItem = state.types[0]
                         showDialog = true
                     }) {
                 AsyncImage(
-                    model = state.types[0].imagePath,
+                    model = Constants.BASE_URL + state.types[0].imagePath,
                     placeholder = painterResource(R.drawable.ic_launcher_background),
                     contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.fillMaxSize()
                 )
             }
 
             Spacer(Modifier.width(40.dp))
 
             Box(
-                Modifier
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
                     .size(100.dp)
-                    .background(color = Color.Cyan, shape = RoundedCornerShape(5.dp))
                     .clickable {
                         selectedItem = state.types[1]
                         showDialog = true
                     }) {
                 AsyncImage(
-                    model = state.types[1].imagePath,
+                    model = Constants.BASE_URL + state.types[1].imagePath,
                     placeholder = painterResource(R.drawable.ic_launcher_background),
                     contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }
@@ -122,34 +131,38 @@ fun TypePage(
 
         Row {
             Box(
-                Modifier
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
                     .size(100.dp)
-                    .background(color = Color.Cyan, shape = RoundedCornerShape(5.dp))
                     .clickable {
                         selectedItem = state.types[2]
                         showDialog = true
                     }) {
                 AsyncImage(
-                    model = state.types[2].imagePath,
+                    model = Constants.BASE_URL + state.types[2].imagePath,
                     placeholder = painterResource(R.drawable.ic_launcher_background),
-                    contentDescription = null
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.fillMaxSize()
                 )
             }
 
             Spacer(Modifier.width(40.dp))
 
             Box(
-                Modifier
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
                     .size(100.dp)
-                    .background(color = Color.Cyan, shape = RoundedCornerShape(5.dp))
                     .clickable {
                         selectedItem = state.types[3]
                         showDialog = true
                     }) {
                 AsyncImage(
-                    model = state.types[3].imagePath,
+                    model = Constants.BASE_URL + state.types[3].imagePath,
                     placeholder = painterResource(R.drawable.ic_launcher_background),
                     contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }

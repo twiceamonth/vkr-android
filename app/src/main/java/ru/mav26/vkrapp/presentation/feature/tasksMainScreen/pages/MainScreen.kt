@@ -134,13 +134,13 @@ fun MainScreen(
                         when (it.id) {
                             Constants.Tabs.ASSIGNMENTS -> {
                                 selectedMainTab = it
-                                selectedTab = Constants.topTabs[0] // "Задачи"
+                                selectedTab = Constants.topTabs[0]
                             }
 
                             Constants.Tabs.TASKS, Constants.Tabs.HABITS -> {
                                 selectedTab = it
                                 selectedMainTab =
-                                    Constants.bottomTabs[0] // "Задания" всегда выбрана
+                                    Constants.bottomTabs[0]
                             }
 
                             else -> {

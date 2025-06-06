@@ -1,17 +1,14 @@
 <resources>
     <string name="app_name">vkrapp</string>
     <string name="emptyString"></string>
-
     <string name="register">Регистрация</string>
     <string name="login">Войти</string>
     <string name="back">Назад</string>
     <string name="next">Далее</string>
-
     <string name="choose">Выбрать</string>
     <string name="cansel">Отмена</string>
     <string name="start">Начать</string>
     <string name="save">Сохранить</string>
-
     <string name="toastPassword">Пароли не совпадают!</string>
     <string name="habitName">Название привычки</string>
     <string name="taskName">Название задачи</string>
@@ -25,37 +22,29 @@
     <string name="taskTimer">Задание с таймером</string>
     <string name="priority">Приоритет</string>
     <string name="links">Ссылки</string>
-
     <string name="male">Муж</string>
     <string name="female">Жен</string>
-
     <string name="loginLabel">Логин</string>
     <string name="passwordLabel">Пароль</string>
     <string name="passwordAgainLabel">Пароль еще раз</string>
     <string name="characterNameLabel">Имя персонажа</string>
-
     <string name="namePageTitle">Назови своего персонажа</string>
     <string name="typePageTitle">Выбери класс персонажа</string>
-
     <string name="low">🐢</string>
     <string name="lowPrio">Низкий</string>
     <string name="medium">⏰</string>
     <string name="mediumPrio">Средний</string>
     <string name="high">🔥</string>
     <string name="highPrio">Высокий</string>
-
     <string name="lowText">Легкая</string>
     <string name="mediumText">Средняя</string>
     <string name="highText">Сложная</string>
-
     <string name="daylyA">Ежедневно</string>
     <string name="weeklyA">Еженедельно</string>
     <string name="monthlyA">Ежемесячно</string>
-
     <string name="daily">Каждый день</string>
     <string name="weekly">Каждую неделю</string>
     <string name="monthly">Каждый месяц</string>
-
     <string name="health">Здоровье</string>
     <string name="exp">Опыт</string>
     <string name="stress">Стресс</string>

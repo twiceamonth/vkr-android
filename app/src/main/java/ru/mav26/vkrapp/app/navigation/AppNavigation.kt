@@ -224,6 +224,7 @@ fun AppNavigation(
                 },
                 onLogout = {
                     tokenManager.clearTokens()
+                    navController.navigate(NavRoutes.INITIAL_SCREEN)
                 },
                 storeViewModel = storeViewModel,
                 achievementsViewModel = achievementsViewModel,
